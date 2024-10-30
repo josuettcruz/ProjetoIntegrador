@@ -14,25 +14,36 @@ import java.util.List;
 public class History {
     
     private List<Desc> list;
-    private Desc atual;
     
     public History(){
         this.list = new ArrayList<>();
-        this.atual = new Desc();
     }
     
     public void Add(Desc doc){
         this.list.add(doc);
-        this.atual = doc;
-    }
-    
-    public Desc Atual(){
-        return this.atual;
     }
     
     public List<Desc> View(){
         return this.list;
     }
+    
+    public boolean Val(){
+        return !this.list.isEmpty();
+    }
+    
+    public boolean Val(int num){
+        
+        if(num >= 0 && num < this.list.size() && !this.list.isEmpty()){
+            
+            return true;
+            
+        } else {
+            
+            return false;
+            
+        }
+        
+    }//Val(int num)
     
     public Desc View(int num){
         

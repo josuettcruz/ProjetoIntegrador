@@ -13,56 +13,73 @@ import java.time.LocalTime;
  */
 public class Desc {
     
-    private LocalDate dia;
-    private LocalTime hora;
+    private Data data;
+    private Hora hora;
     private String desc;
     
     public Desc(){
-        this.dia = LocalDate.now();
-        this.hora = LocalTime.of(0, 0, 0);
+        this.data = new Data();
+        this.hora = new Hora();
         this.desc = "";
     }
     
-    public Desc(LocalDate dia){
-        this.dia = dia;
-        this.hora = LocalTime.of(0, 0, 0);
-        this.desc = "";
-    }
-    
-    public Desc(LocalDate dia, String desc){
-        this.dia = dia;
-        this.hora = LocalTime.of(0, 0, 0);
+    public Desc(String desc){
+        this.data = new Data();
+        this.hora = new Hora();
         this.desc = desc;
     }
     
-    public Desc(LocalDate dia, LocalTime hora){
-        this.dia = dia;
+    public Desc(Data data){
+        this.data = data;
+        this.hora = new Hora();
+        this.desc = "";
+    }
+    
+    public Desc(Data data, String desc){
+        this.data = data;
+        this.hora = new Hora();
+        this.desc = desc;
+    }
+    
+    public Desc(Data data, Hora hora){
+        this.data = data;
         this.hora = hora;
         this.desc = "";
     }
     
-    public Desc(LocalDate dia, LocalTime hora, String desc){
-        this.dia = dia;
+    public Desc(Data data, Hora hora, String desc){
+        this.data = data;
         this.hora = hora;
         this.desc = desc;
     }
     
-    public Data getData(){
-        Data d = new Data(this.dia);
-        return d;
+    public void setDataTime(Data data, Hora hora){
+        this.data = data;
+        this.hora = hora;
     }
     
-    public Hora getHora(){
-        Hora h = new Hora(this.hora);
-        return h;
+    public void setData(Data data){
+        this.data = data;
     }
     
-    public String getDesc(){
-        return this.desc;
+    public void setHora(Hora hora){
+        this.hora = hora;
     }
     
     public void setDesc(String desc){
         this.desc = desc;
+    }
+    
+    public Data getData(){
+        return this.data;
+    }
+    
+    public Hora getHora(){
+        return this.hora;
+    }
+    
+    public String getDesc(){
+        return this.desc;
     }
     
 }
