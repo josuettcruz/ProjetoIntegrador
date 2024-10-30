@@ -21,12 +21,16 @@ public class ControllerIntro {
     @GetMapping("/")
     public String Index(Model model){
         
-        model.addAttribute("title", "P.I. [" + 
-                new Data(Registro.Real()).DataAbreviada(true) + 
-                "]");
+        Data d = new Data(Registro.Real());
         
-        model.addAttribute("top", "Hoje é " + 
-                new Data().DataCompleta(true) + 
+        model.addAttribute("title", d.DataAbreviada(false));
+        
+        model.addAttribute("top", "Hoje é dia " + 
+                new Data().DataCompleta(false) + 
+                "!");
+        
+        model.addAttribute("learn", "Página concluída " + 
+                d.DataLinha(false) + 
                 "!");
         
         return "index";

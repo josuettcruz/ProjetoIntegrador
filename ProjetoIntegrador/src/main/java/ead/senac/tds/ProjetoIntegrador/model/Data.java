@@ -262,31 +262,31 @@ public class Data {
             switch(s){
                 
                 case 1 ->{
-                    txt += "Seg";
+                    txt += "Segunda";
                 }
                 
                 case 2 ->{
-                    txt += "Ter";
+                    txt += "Terça";
                 }
                 
                 case 3 ->{
-                    txt += "Qua";
+                    txt += "Quarta";
                 }
                 
                 case 4 ->{
-                    txt += "Qui";
+                    txt += "Quinta";
                 }
                 
                 case 5 ->{
-                    txt += "Sex";
+                    txt += "Sexta";
                 }
                 
                 case 6 ->{
-                    txt += "Sáb";
+                    txt += "Sábado";
                 }
                 
                 case 7 ->{
-                    txt += "Dom";
+                    txt += "Domingo";
                 }
                 
             }//switch(s)
@@ -460,7 +460,7 @@ public class Data {
             int year = ag - at;
             
             if(!ifo){
-                txt += "Há ";
+                txt += "há ";
             }
             
             txt += year;
@@ -471,7 +471,7 @@ public class Data {
                 txt += " anos atrás";
             }
             
-        } else if(dg == dt){//if
+        } else if(dg == dt && ag >= at){//if
             
             if(ifo){
                 txt += "HOJE";
@@ -479,7 +479,7 @@ public class Data {
                 txt += "hoje";
             }
             
-        } else if(dg - dt == 1){//if
+        } else if(dg - dt == 1 && ag >= at){//if
             
             if(ifo){
                 txt += "ONTEM";
@@ -487,7 +487,7 @@ public class Data {
                 txt += "ontem";
             }
             
-        } else if(dg - dt > 30){//if
+        } else if(dg - dt > 30 && ag >= at){//if
             
             int mes = LocalDate.now().getMonthValue() - this.data.getMonthValue();
             
@@ -496,7 +496,7 @@ public class Data {
                 if(ifo){
                     txt += "ESTE MÊS";
                 } else {
-                    txt += "Este mês";
+                    txt += "este mês";
                 }
                 
             } else if(mes == 1){//if(mes == 0)
@@ -504,13 +504,13 @@ public class Data {
                 if(ifo){
                     txt += "MÊS PASSADO";
                 } else {
-                    txt += "No mês passado";
+                    txt += "no mês passado";
                 }
                 
             } else {//if(mes == 0)
                 
                 if(!ifo){
-                    txt += "Há ";
+                    txt += "há ";
                 }
                 
                 txt += mes;
@@ -523,12 +523,12 @@ public class Data {
                 
             }//if(mes == 0)
         
-        } else if(dg > dt){//if
+        } else if(dg > dt && ag >= at){//if
             
             int day = dg - dt;
             
             if(!ifo){
-                txt += "Há ";
+                txt += "há ";
             }
             
             txt += day;
@@ -540,9 +540,13 @@ public class Data {
             }
         
         } else if(ifo){//if
+            
             txt += "NO FUTURO";
+            
         } else {//if
+            
             txt += "no futuro";
+            
         }//if
         
         return txt;

@@ -10,7 +10,7 @@ public class ProjetoIntegradorApplication {
 
 	public static void main(String[] args) {
             
-            //SpringApplication.run(ProjetoIntegradorApplication.class, args);
+            SpringApplication.run(ProjetoIntegradorApplication.class, args);
 
             Data d = new Data(Registro.Real());
 
@@ -27,8 +27,8 @@ public class ProjetoIntegradorApplication {
             System.out.println("ALUNO\t\tJosué Trindade Torres Cruz");
 
             System.out.println("REALIZAÇÃO\t" + 
-                    d.DataAbreviada(false) + 
-                    " --> " + 
+                    d.DataAbreviada(true) + 
+                    " - " + 
                     d.DataLinha(true));
 
             System.out.println();
