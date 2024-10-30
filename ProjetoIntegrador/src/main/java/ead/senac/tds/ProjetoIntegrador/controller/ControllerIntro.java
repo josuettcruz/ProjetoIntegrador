@@ -29,13 +29,6 @@ public class ControllerIntro {
                 new Data().DataCompleta(true) + 
                 "!");
         
-        model.addAttribute("learn", "Página concluída " + 
-                d.DataLinha(false) + 
-                "!");
-        
-        model.addAttribute("console", new Data().DataCompleta(true));
-        model.addAttribute("host", Registro.Host());
-        
         return "index";
         
     }
