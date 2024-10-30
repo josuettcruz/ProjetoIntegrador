@@ -34,6 +34,7 @@ public class ControllerIntro {
                 "!");
         
         model.addAttribute("console", new Data().DataCompleta(true));
+        model.addAttribute("host", Registro.Host());
         
         return "index";
         
