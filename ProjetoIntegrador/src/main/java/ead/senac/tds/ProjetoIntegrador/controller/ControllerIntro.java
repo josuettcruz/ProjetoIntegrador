@@ -18,8 +18,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class ControllerIntro {
     
-    @GetMapping("/page")
-    public String Index(Model model,@RequestParam(defaultValue="") String user){
+    @GetMapping("/")
+    public String Index(Model model){
+        
+        model.addAttribute("title", "P.I. [" + 
+                new Data(Registro.Real()).DataAbreviada(true) + 
+                "]");
+        
+        model.addAttribute("top", "Hoje é " + 
+                new Data().DataCompleta(true) + 
+                "!");
         
         return "index";
         

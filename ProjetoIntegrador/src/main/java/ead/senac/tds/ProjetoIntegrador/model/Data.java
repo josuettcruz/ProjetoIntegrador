@@ -220,13 +220,15 @@ public class Data {
                 this.data = LocalDate.of(year, month, day);
 
             } else {
-
+                
+                this.data = LocalDate.now();
                 tema = "Data inválida!";
 
             }//if
         
         } catch(Exception e){
             
+            this.data = LocalDate.now();
             tema = e.getMessage();
             
         }
@@ -247,11 +249,51 @@ public class Data {
         return this.data;
     }
     
-    public String DataAbreviada(){
+    public String DataAbreviada(boolean week){
         
         String sep = "/";
         
         String txt = "";
+        
+        if(week){
+            
+            int s = this.data.getDayOfWeek().getValue();
+            
+            switch(s){
+                
+                case 1 ->{
+                    txt += "Seg";
+                }
+                
+                case 2 ->{
+                    txt += "Ter";
+                }
+                
+                case 3 ->{
+                    txt += "Qua";
+                }
+                
+                case 4 ->{
+                    txt += "Qui";
+                }
+                
+                case 5 ->{
+                    txt += "Sex";
+                }
+                
+                case 6 ->{
+                    txt += "Sáb";
+                }
+                
+                case 7 ->{
+                    txt += "Dom";
+                }
+                
+            }//switch(s)
+            
+            txt += ", ";
+            
+        }//if(week)
         
         int a = this.data.getYear();
         int m = this.data.getMonthValue();
@@ -276,16 +318,17 @@ public class Data {
         
     }//DataAbreviada(String sep)
     
-    public String DataCompleta(boolean semana){
+    public String DataCompleta(boolean week){
         
         String txt = "";
         
         int a = this.data.getYear();
         int m = this.data.getMonthValue();
         int d = this.data.getDayOfMonth();
-        int s = this.data.getDayOfWeek().getValue();
         
-        if(semana){
+        if(week){
+            
+            int s = this.data.getDayOfWeek().getValue();
 
             switch(s){
 
@@ -298,7 +341,7 @@ public class Data {
                 }
 
                 case 3 ->{
-                    txt += "quarta";
+                    txt += "Quarta";
                 }
 
                 case 4 ->{
@@ -394,13 +437,9 @@ public class Data {
         
     }//DataCompleta(boolean semana)
     
-    public String DataCompleta(){
-        return DataCompleta(true);
-    }
-    
-    public String DataLinha(String start, boolean ifo){
+    public String DataLinha(boolean ifo){
         
-        String txt = start;
+        String txt = "";
         
         int dg = LocalDate.now().getDayOfYear();
         int dt = this.data.getDayOfYear();
@@ -509,17 +548,5 @@ public class Data {
         return txt;
         
     }//DataLinha(String start, String end)
-    
-    public String DataLinha(){
-        return DataLinha("", true);
-    }
-    
-    public String DataLinha(boolean ifo){
-        return DataLinha("", ifo);
-    }
-    
-    public String DataLinha(String text){
-        return DataLinha(text, text.contains(":"));
-    }
     
 }
