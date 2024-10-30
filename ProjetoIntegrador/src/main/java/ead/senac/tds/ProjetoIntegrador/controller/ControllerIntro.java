@@ -25,13 +25,15 @@ public class ControllerIntro {
         
         model.addAttribute("title", d.DataAbreviada(false));
         
-        model.addAttribute("top", "Hoje é dia " + 
-                new Data().DataCompleta(false) + 
+        model.addAttribute("top", "Hoje é " + 
+                new Data().DataCompleta(true) + 
                 "!");
         
         model.addAttribute("learn", "Página concluída " + 
                 d.DataLinha(false) + 
                 "!");
+        
+        model.addAttribute("console", new Data().DataCompleta(true));
         
         return "index";
         
