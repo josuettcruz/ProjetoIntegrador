@@ -5,6 +5,7 @@
 package ead.senac.tds.ProjetoIntegrador.file;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -69,6 +70,26 @@ public class csv extends file{
         
     }//Insert(String [] data)
     
+    public void Insert(List<String> data){
+        
+        String txt = "";
+        
+        for(int i = 0; i < data.size(); i++){
+            
+            if(i > 0){
+                
+                txt += this.jon;
+                
+            }//if(i > 0)
+            
+            txt += data.get(i).replaceAll(this.jon, " ");
+            
+        }//for(int i = 0; i < data.length; i++)
+        
+        super.Write(txt);
+        
+    }//Insert(String [] data)
+    
     public void InsertAll(String[] txt){
         
         String date = "";
@@ -88,6 +109,26 @@ public class csv extends file{
         this.text.add(date);
         
     }//InsertAll(String[] txt)
+    
+    public void InsertAll(List<String> txt){
+        
+        String date = "";
+        
+        for(int x = 0; x < txt.size(); x++){
+            
+            if(x > 0){
+                
+                date += this.separator;
+                
+            }
+            
+            date += txt.get(x);
+            
+        }//for(int x = 0; x < txt.length; x++)
+        
+        this.text.add(date);
+        
+    }//InsertAll(List<String> txt)
     
     public void InsertAll(){
         

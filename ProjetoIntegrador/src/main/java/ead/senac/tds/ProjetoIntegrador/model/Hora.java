@@ -404,4 +404,38 @@ public class Hora {
         
     }//Hora()
     
+    public String Load(){
+        
+        final char sep = '-';
+        
+        int h = this.hora.getHour();
+        int m = this.hora.getMinute();
+        int s = this.hora.getSecond();
+        
+        String txt = "";
+        
+        if(h < 10){
+            txt += "0";
+        }
+        
+        txt += h;
+        txt += sep;
+        
+        if(m < 10){
+            txt += "0";
+        }
+        
+        txt += m;
+        txt += sep;
+        
+        if(s < 10){
+            txt += "0";
+        }
+        
+        txt += s;
+        
+        return txt;
+        
+    }
+    
 }

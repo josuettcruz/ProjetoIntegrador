@@ -553,4 +553,34 @@ public class Data {
         
     }//DataLinha(String start, String end)
     
+    public String Load(){
+        
+        final char sep = '-';
+        
+        String txt = "";
+        
+        int a = this.data.getYear();
+        int m = this.data.getMonthValue();
+        int d = this.data.getDayOfMonth();
+        
+        txt += a;
+        txt += sep;
+        
+        if(m < 10){
+            txt += "0";
+        }
+        
+        txt += m;
+        txt += sep;
+        
+        if(d < 10){
+            txt += "0";
+        }
+        
+        txt += d;
+        
+        return txt;
+        
+    }
+    
 }

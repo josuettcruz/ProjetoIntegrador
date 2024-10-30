@@ -4,8 +4,6 @@
  */
 package ead.senac.tds.ProjetoIntegrador.model;
 
-import java.util.Arrays;
-import java.util.List;
 
 /**
  *
@@ -67,26 +65,6 @@ public class item {
         return this.history;
     }
     
-    public boolean Data(String data){
-        
-        boolean valid = true;
-        
-        Data d = new Data(data);
-        
-        if(d.Val()){
-            
-            this.desc.setData(d);
-            
-        } else {
-            
-            valid = false;
-            
-        }
-        
-        return valid;
-        
-    }//Data(String data)
-    
     public boolean Hora(String hora){
         
         boolean valid = true;
@@ -107,37 +85,11 @@ public class item {
         
     }//Hora(String hora)
     
-    public List<String> Status(){
-        
-        //https://www.geeksforgeeks.org/arrays-aslist-method-in-java-with-examples/
-        
-        return Arrays.asList(this.status);
-        
-    }//Status()
-    
-    public String Status(int numb){
-        
-        int num = numb - 1;
-        
-        if(num >= 0 && num < this.status.length){
-            
-            return status[num];
-            
-        } else {
-            
-            return "Valor Inválido!";
-            
-        }
-        
-    }//Status(int numb)
-    
-    public int cod(){
+    public int cod(String text){
         
         int num = 0;
         
         for(int n = 0; n < status.length; n++){
-            
-            String text = this.desc.getDesc();
             
             if(status[n].equalsIgnoreCase(text)){
                 
@@ -150,38 +102,15 @@ public class item {
         
         return num;
         
-    }//cod()
+    }//cod(String text)
     
-    public int cod(int num){
+    public boolean cod(int num){
         
-        int number = 0;
+        return num > 0 && num <= status.length;
         
-        if(this.history.Val(num)){
-        
-            for(int n = 0; n < status.length; n++){
-
-                String text = this.history.View(num).getDesc();
-
-                if(status[n].equalsIgnoreCase(text)){
-
-                    num = n+1;
-                    break;
-
-                }
-
-            }//for(int n = 0; n < status.length; n++)
-        
-        } else {//if(this.history.Val(num))
-            
-            number = -1;
-            
-        }//if(this.history.Val(num))
-        
-        return number;
-        
-    }//cod()
+    }//cod(int num)
     
-    public boolean newStatus(int cod){
+    /*public boolean newStatus(int cod){
         
         int num = cod-1;
         
@@ -199,7 +128,7 @@ public class item {
             return false;
         }
         
-    }//newStatus(int cod)
+    }/*newStatus(int cod)*/
     
     public boolean newStatus(int cod, String date){
         

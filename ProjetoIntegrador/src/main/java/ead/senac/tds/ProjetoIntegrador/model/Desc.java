@@ -15,42 +15,12 @@ public class Desc {
     
     private Data data;
     private Hora hora;
-    private String desc;
+    private int status;
     
     public Desc(){
         this.data = new Data();
         this.hora = new Hora();
-        this.desc = "";
-    }
-    
-    public Desc(String desc){
-        this.data = new Data();
-        this.hora = new Hora();
-        this.desc = desc;
-    }
-    
-    public Desc(Data data){
-        this.data = data;
-        this.hora = new Hora();
-        this.desc = "";
-    }
-    
-    public Desc(Data data, String desc){
-        this.data = data;
-        this.hora = new Hora();
-        this.desc = desc;
-    }
-    
-    public Desc(Data data, Hora hora){
-        this.data = data;
-        this.hora = hora;
-        this.desc = "";
-    }
-    
-    public Desc(Data data, Hora hora, String desc){
-        this.data = data;
-        this.hora = hora;
-        this.desc = desc;
+        this.status = 0;
     }
     
     public void setDataTime(Data data, Hora hora){
@@ -66,8 +36,8 @@ public class Desc {
         this.hora = hora;
     }
     
-    public void setDesc(String desc){
-        this.desc = desc;
+    public void setStatus(int status){
+        this.status = status;
     }
     
     public Data getData(){
@@ -78,8 +48,8 @@ public class Desc {
         return this.hora;
     }
     
-    public String getDesc(){
-        return this.desc;
+    public int getStatus(){
+        return this.status;
     }
     
 }

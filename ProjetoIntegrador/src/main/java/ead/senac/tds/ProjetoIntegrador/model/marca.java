@@ -40,6 +40,10 @@ public class marca {
         
     }
     
+    public int Max(){
+        return this.detals.size();
+    }
+    
     public String Read(int num){
         
         String txt = "";
