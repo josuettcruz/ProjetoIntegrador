@@ -23,6 +23,8 @@ public class ControllerIntro {
         
         Data d = new Data(Registro.Real());
         
+        Lista lt = new Arquivo().Arq();
+        
         model.addAttribute("title", d.DataLinha(true) + " - " +
                 d.DataAbreviada(false));
         
@@ -30,9 +32,8 @@ public class ControllerIntro {
                 new Data().DataCompleta(true) + 
                 "!");
         
-        model.addAttribute("learn", "Finalizado  " + 
-                d.DataLinha(false) + 
-                "!");
+        model.addAttribute("citen", !lt.Itens().isEmpty());
+        model.addAttribute("eiten", model);
         
         model.addAttribute("localhost", Registro.Host());
         

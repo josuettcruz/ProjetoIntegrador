@@ -4,9 +4,6 @@
  */
 package ead.senac.tds.ProjetoIntegrador.model;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-
 /**
  *
  * @author josue
@@ -20,7 +17,7 @@ public class Desc {
     public Desc(){
         this.data = new Data();
         this.hora = new Hora();
-        this.status = 0;
+        this.status = 1;
     }
     
     public void setDataTime(Data data, Hora hora){

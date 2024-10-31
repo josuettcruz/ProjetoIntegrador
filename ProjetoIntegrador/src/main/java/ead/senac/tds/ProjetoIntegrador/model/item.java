@@ -17,14 +17,12 @@ public class item {
     protected String nome;
     protected Desc desc;
     protected produto produto;
-    protected History history;
     
     public item(){
         this.id = 0;
         this.nome = "";
         this.desc = new Desc();
         this.produto = new produto();
-        this.history = new History();
     }
     
     public void setId(int id){
@@ -37,7 +35,6 @@ public class item {
     
     public void setDesc(Desc desc){
         this.desc = desc;
-        this.history.Add(desc);
     }
     
     public void setProduto(produto produto){
@@ -59,10 +56,6 @@ public class item {
     
     public produto getProduto(){
         return this.produto;
-    }
-    
-    public History History(){
-        return this.history;
     }
     
     public boolean Hora(String hora){
@@ -144,7 +137,6 @@ public class item {
             if(d.Val()){
             
                 this.desc.setDataTime(d, hour);
-                this.history.Add(this.desc);
             
             } else {
                 valid = false;
@@ -172,7 +164,6 @@ public class item {
             if(d.Val() && hour.Val()){
             
                 this.desc.setDataTime(d, hour);
-                this.history.Add(this.desc);
             
             } else {
                 valid = false;
