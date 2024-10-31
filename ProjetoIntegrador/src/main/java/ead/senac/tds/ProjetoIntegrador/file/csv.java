@@ -180,6 +180,30 @@ public class csv extends file{
         
     }//Reply(int num, String [] data)
     
+    public void Reply(int num, List<String> data){
+        
+        String txt = "";
+        
+        if(num >= 0 && num < super.Max() && super.Max() >= 0){
+        
+            for(int i = 0; i < data.size(); i++){
+
+                if(i > 0){
+
+                    txt += this.jon;
+
+                }//if(i > 0)
+
+                txt += data.get(i).replaceAll(this.jon, " ");
+
+            }//for(int i = 0; i < data.length; i++)
+        
+        }//if(num >= 0 && num < super.Max() && super.Max() >= 0)
+        
+        super.Modify(num, txt);
+        
+    }//Reply(int num, List<String> data)
+    
     public int Tot(int num){
         
         int numb = -1;

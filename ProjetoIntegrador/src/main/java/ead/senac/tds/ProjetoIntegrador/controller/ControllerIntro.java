@@ -30,7 +30,7 @@ public class ControllerIntro {
                 new Data().DataCompleta(true) + 
                 "!");
         
-        model.addAttribute("learn", "Finalilizado  " + 
+        model.addAttribute("learn", "Finalizado  " + 
                 d.DataLinha(false) + 
                 "!");
         

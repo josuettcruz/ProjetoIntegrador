@@ -180,4 +180,262 @@ public class Arquivo{
         
     }//addItem(item item)
     
+    public boolean AlterMarca(marca mac, int cod){
+        
+        boolean valid = true;
+        
+        int num = -1;
+        
+        Lista document = this.Arq();
+        
+        int i = 0;
+        
+        do{
+            
+            if(document.Marcas().get(i).getId() == cod){
+                
+                num = i;
+                
+            }
+            
+            i++;
+            
+        }while(num <= 0 && i < document.Marcas().size());
+        
+        if(num > 0 && mac.Max() > 0){
+            
+            csv doc = new csv(files_marca);
+
+            doc.Reply(num, mac.Read());
+            
+        } else {
+            
+            valid = false;
+            
+        }
+        
+        
+        return valid;
+        
+    }//AlterMarca(marca mac, int cod)
+    
+    public boolean AlterProduto(produto pro, int cod){
+        
+        boolean valid = true;
+        
+        int num = -1;
+        
+        Lista document = this.Arq();
+        
+        int i = 0;
+        
+        do{
+            
+            if(document.Produtos().get(i).getId() == cod){
+                
+                num = i;
+                
+            }
+            
+            i++;
+            
+        }while(num <= 0 && i < document.Produtos().size());
+        
+        if(num > 0){
+            
+            csv doc = new csv(files_produto);
+
+            String[] dados = new String[2];
+
+            dados[0] = "";
+            dados[0] += pro.getMarca().getId();
+
+            dados[1] = pro.gedDesc();
+
+            doc.Reply(num, dados);
+            
+        } else {
+            
+            valid = false;
+            
+        }
+        
+        return valid;
+        
+    }//AlterProduto(produto pro, int cod)
+    
+    public boolean AlterItem(item it, int cod){
+        
+        boolean valid = true;
+        
+        int num = -1;
+        
+        Lista document = this.Arq();
+        
+        int i = 0;
+        
+        do{
+            
+            if(document.Itens().get(i).getId() == cod){
+                
+                num = i;
+                
+            }
+            
+            i++;
+            
+        }while(num <= 0 && i < document.Itens().size());
+        
+        if(num > 0){
+            
+            csv doc = new csv(files_item);
+
+            String[] dados = new String[5];
+
+            dados[0] = "";
+            dados[0] += it.getProduto().getId();
+
+            dados[1] = it.getNome();
+
+            dados[2] = "";
+            dados[2] += it.getDesc().getStatus();
+
+            dados[3] = it.getDesc().getData().Load();
+
+            dados[4] = it.getDesc().getHora().Load();
+            
+            doc.Reply(num, dados);
+        
+        } else {
+            valid = false;
+        }
+        
+        return valid;
+        
+    }//AlterItem(item it, int cod)
+    
+    public boolean deleteMarca(int cod){
+        
+        boolean valid = true;
+        
+        Lista l = this.Arq();
+        
+        int num = -1;
+        
+        for(marca m : l.Marcas()){
+            
+            if(m.getId() == cod){
+                num = m.getId();
+                break;
+            }
+            
+        }
+            
+        for(produto p : l.Produtos()){
+
+            if(p.getMarca().getId() == num){
+
+                valid = false;
+                break;
+
+            }
+
+        }
+        
+        if(valid && num > 0){
+            
+            csv del = new csv(files_marca);
+            
+            for(int x = 0; x < l.Marcas().size(); x++){
+                
+                if(l.Marcas().get(x).getId() == x){
+                    
+                    del.Remove(x);
+                    
+                }
+                
+            }
+            
+        } else {
+            valid = false;
+        }
+        
+        return valid;
+        
+    }//deleteMarca(int cod)
+    
+    public boolean deleteProduto(int cod){
+        
+        boolean valid = true;
+        
+        Lista l = this.Arq();
+        
+        int num = -1;
+        
+        for(produto p : l.Produtos()){
+            
+            if(p.getId() == cod){
+                num = p.getId();
+                break;
+            }
+            
+        }
+            
+        for(item i : l.Itens()){
+
+            if(i.getProduto().getId() == num){
+
+                valid = false;
+                break;
+
+            }
+
+        }
+        
+        if(valid && num > 0){
+            
+            csv del = new csv(files_produto);
+            
+            for(int x = 0; x < l.Produtos().size(); x++){
+                
+                if(l.Produtos().get(x).getId() == x){
+                    
+                    del.Remove(x);
+                    
+                }
+                
+            }
+            
+        } else {
+            valid = false;
+        }
+        
+        return valid;
+        
+    }//deleteProduto(int cod)
+    
+    public boolean deleteItem(int cod){
+        
+        boolean valid = false;
+        
+        Lista l = this.Arq();
+        
+        csv del = new csv(files_item);
+        
+        for(int x = 0; x < l.Itens().size(); x++){
+            
+            if(l.Itens().get(x).getId() == cod){
+                
+                del.Remove(x);
+                valid = true;
+                break;
+                
+            }
+            
+        }
+        
+        return valid;
+        
+    }//deleteItem(int cod)
+    
 }
