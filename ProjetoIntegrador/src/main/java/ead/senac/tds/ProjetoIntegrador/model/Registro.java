@@ -5,7 +5,6 @@
 package ead.senac.tds.ProjetoIntegrador.model;
 
 import java.time.LocalDate;
-import java.time.Month;
 
 /**
  *
@@ -14,7 +13,7 @@ import java.time.Month;
 public class Registro {
     
     public static LocalDate Real(){
-        return LocalDate.of(2024, 10, 30);
+        return LocalDate.of(2024, 10, 31);
     }
     
     public static String Host(){

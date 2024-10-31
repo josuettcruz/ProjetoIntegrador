@@ -99,4 +99,58 @@ public class Lista {
         return this.itens;
     }
     
+    public marca Marca(int cod){
+        
+        marca exe = new marca();
+        
+        for(marca m : this.marcas){
+            
+            if(m.getId() == cod){
+                
+                exe = m;
+                break;
+                
+            }
+            
+        }
+        
+        return exe;
+        
+    }//Marcas(int num)
+    
+    public produto Produto(int cod){
+        
+        produto exe = new produto();
+        
+        for(produto p : this.produtos){
+            
+            if(p.getId() == cod){
+                exe = p;
+            }
+            
+        }
+        
+        return exe;
+        
+    }//Produto(int cod)
+    
+    public item Item(int cod){
+        
+        item exe = new item();
+        
+        for(item i : this.itens){
+            
+            if(i.getId() == cod){
+                
+                exe = i;
+                break;
+                
+            }
+            
+        }
+        
+        return exe;
+        
+    }//Item(int cod)
+    
 }

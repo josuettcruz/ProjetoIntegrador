@@ -19,11 +19,11 @@ public class Arquivo{
     
     final String[] doc_produto = {"0","Descrição"};
     
-    private Lista list;
+    public Arquivo(){};
     
-    public Arquivo(){
+    public Lista Arq(){
         
-        this.list = new Lista();
+        Lista list = new Lista();
         
         csv arq_marca = new csv(files_marca);
         csv arq_produto = new csv(files_produto);
@@ -63,7 +63,7 @@ public class Arquivo{
                         
                         pro.setDesc(arq_produto.Read(i, 1));
                         
-                        this.list.newProduto(pro, num.Num());
+                        list.newProduto(pro, num.Num());
                     
                     }//if(num.Val())
                 
@@ -113,13 +113,15 @@ public class Arquivo{
                         
                     }
                     
-                    this.list.newItem(it, num.Num());
+                    list.newItem(it, num.Num());
                     
                 }//if(num.Val())
                 
             }//for(int i = 0; i < arq_item.Tot(); i++)
             
         }//if(arq_item.Tot() > 0)
+        
+        return list;
         
     }//Arquivo()
     
@@ -177,9 +179,5 @@ public class Arquivo{
         doc.Insert(dados);
         
     }//addItem(item item)
-    
-    public Lista Learn(){
-        return this.list;
-    }
     
 }

@@ -27,9 +27,9 @@ public class ProjetoIntegradorApplication {
             System.out.println("ALUNO\t\tJosué Trindade Torres Cruz");
 
             System.out.println("REALIZAÇÃO\t" + 
-                    d.DataAbreviada(true) + 
+                    d.DataLinha(true) + 
                     " - " + 
-                    d.DataLinha(true));
+                    d.DataCompleta(false));
 
             System.out.println();
 

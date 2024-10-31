@@ -8,11 +8,29 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         <title th:text="${title}" />
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            doc{
+                display:none;
+            }
+        </style>
+        <script>
+            
+            function Host(){
+                
+                console.clear();
+                console.log(document.querySelector("doc").innerText);
+                
+            }//Host()
+            
+        </script>
     </head>
-    <body>
+    
+    <body onload="Host()">
         
         <h1 th:text="${top}" />
         <h2 th:text="${learn}" />
+        
+        <doc th:text="${localhost}" />
         
     </body>
 </html>

@@ -23,11 +23,18 @@ public class ControllerIntro {
         
         Data d = new Data(Registro.Real());
         
-        model.addAttribute("title", d.DataAbreviada(false));
+        model.addAttribute("title", d.DataLinha(true) + " - " +
+                d.DataAbreviada(false));
         
         model.addAttribute("top", "Hoje é " + 
                 new Data().DataCompleta(true) + 
                 "!");
+        
+        model.addAttribute("learn", "Finalilizado  " + 
+                d.DataLinha(false) + 
+                "!");
+        
+        model.addAttribute("localhost", Registro.Host());
         
         return "index";
         
