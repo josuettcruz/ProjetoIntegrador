@@ -43,6 +43,8 @@ public class Arquivo{
                     
                 }//for(int j = 0; j < arq_marca.Tot(i); j++)
                 
+                list.newMarca(mc);
+                
             }//for(int i = 0; i < arq_marca.Tot(); i++)
             
         }//if(marca)

@@ -12,19 +12,34 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
     </head>
     <body>
         
+    <doc th:text="${host}" style="display:none" />
+        
         <!-- divtopclass -- div top class -->
         <div th:class="${divtopclass}" th:style="${divtopstyle}">
             <h1 th:text="${top}" th:class="${htopclass}" th:style="${htopstyle}" />
         </div><!-- div -- Topo -->
         
         <!-- divclass -- div container class -->
-        <div class="container-fluid mt-5">
+        <div th:class="${div_container}">
             
-            <div class="row">
+            <div th:class="${div_row}">
             
-                <form th:acion="@{/mac}" method="GET" th:object="${mac}">
+                <form th:action="@{/mac}" method="GET">
 
-                    <div class="col"></div>
+                    <div th:class="${div_col}">
+                        
+                        <label th:text="${lbl}" th:class="${label}" />
+                        <input id="cp" th:class="${input}" type="text" name="txt" />
+                        
+                    </div>
+
+                    <div th:class="${div_col}">
+                        
+                        <input th:class="${submit}" type="submit" value="SALVAR" />
+                        <input th:class="${reset}" type="reset" VALUE="LIMPAR" />
+                        <div th:class="${cancel}" onclick="Cancel()">VOLTAR</div>
+                        
+                    </div>
 
                 </form>
                 
@@ -32,7 +47,27 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
             
         </div><!-- div -- container -->
         
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        <script>
+            
+            function Cancel(){
+                
+                const campo = document.getElementById("cp");
+                
+                if(campo.value.trim() == ""){
+                
+                    window.open(document.querySelector("doc").innerText,"_parent");
+                
+                } else {
+                    
+                    campo.focus();
+                    
+                }
+                
+            };
+            
+        </script>
         
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+                
     </body>
 </html>

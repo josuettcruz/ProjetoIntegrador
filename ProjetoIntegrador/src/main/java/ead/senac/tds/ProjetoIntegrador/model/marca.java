@@ -22,6 +22,12 @@ public class marca {
         this.detals = new ArrayList<>();
     }
     
+    public marca(String txt){
+        this.id = 0;
+        this.detals = new ArrayList<>();
+        this.detals.add(txt);
+    }
+    
     public void setId(int id){
         this.id = id;
     }

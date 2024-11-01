@@ -23,8 +23,13 @@ public class ControllerAll {
     final String htopclass = "text-primary-emphasis text-center";
     final String htopstyle = "font-size: 4vw";
     
+    final String lbl_marca = "Detalhes:";
+    String label_marca = lbl_marca;
+    
     @GetMapping("/")
     public String Index(Model model){
+        
+        this.label_marca = lbl_marca;
         
         Data d = new Data(Registro.Real());
         
@@ -58,22 +63,23 @@ public class ControllerAll {
         model.addAttribute("htopclass", this.htopclass);
         model.addAttribute("htopstyle", this.htopstyle);
         model.addAttribute("emac", lt.Marcas());
-        /* htopclass -- h1 top class */
-        
-        /* Bootstrap -- div -- h1 -- Topo */
         model.addAttribute("htopclass", "text-primary-emphasis text-center");
         model.addAttribute("htopstyle", "font-size: 4vw");
-        /* htopclass -- h1 top class */
+        /* Bootstrap -- div -- Topo */
         
         /* Bootstrap -- div -- Link para os formulários */
         model.addAttribute("div1class", "container-sm bg-success-subtle " + 
-                "border border-success my-3 p-2 " + 
-                "text-center text-black fs-3 fw-bold");
+                "border border-success my-3 p-2");
+        model.addAttribute("div1aclass", "link-dark link-offset-1 " + 
+                "link-underline link-underline-opacity-0 " + 
+                "link-underline-opacity-75-hover " + 
+                "text-center fs-3 fw-bold");
         /* div1 -- div 1 class */
         
         /* Bootstrap -- table -- Lista de itens */
-        model.addAttribute("titemclass", "table table-info table-striped table-hover");
-        /* titemclass -- t - tabela -- item -- class */
+        model.addAttribute("tclass", "table table-info " + 
+                "table-striped table-hover");
+        /* titemclass -- t - tabela -- class */
         
         return "index";
         
@@ -83,6 +89,8 @@ public class ControllerAll {
     public String NovaMarca(Model model){
         
         Data d = new Data(Registro.Real());
+        
+        model.addAttribute("host", Registro.Host());
         
         model.addAttribute("title", d.DataLinha(true) + " - " +
                 d.DataAbreviada(false));
@@ -96,20 +104,41 @@ public class ControllerAll {
         model.addAttribute("divtopstyle", this.divtopstyle);
         model.addAttribute("htopclass", this.htopclass);
         model.addAttribute("htopstyle", this.htopstyle);
-        /* htopclass -- h1 top class */
-        /* htopclass -- h1 top class */
+        /* Bootstrap -- div -- Topo */
+        
+        model.addAttribute("div_container", "container-fluid mt-5 p-2 bg-success-subtle");
+        model.addAttribute("div_row", "row row-cols-2");
+        model.addAttribute("div_col", "col-sm");
+        model.addAttribute("lbl", this.label_marca);
+        
+        model.addAttribute("label", "form-label d-block" + 
+                "text-center text-dark fs-2");
+        
+        model.addAttribute("input", "form-control form-control-lg d-block ");
+        model.addAttribute("submit", "btn btn-outline-success btn-lg mt-2");
+        model.addAttribute("reset", "btn btn-outline-danger btn-lg mt-2");
+        model.addAttribute("cancel", "btn btn-outline-warning btn-lg mt-2");
         
         return "novamarca";
         
     }//Index(Model model)
     
     @GetMapping("/mac")
-    public String formaMarca(Model model, @ModelAttribute marca mac){
+    public String formMarca(Model model, String txt){
         
-        new Arquivo().AddMarca(mac);
+        if(txt.trim().length() >= 5){
         
-        return "redirect:/";
+            new Arquivo().AddMarca(new marca(txt.trim()));
+            this.label_marca = lbl_marca;
+            return "redirect:/";
         
-    }
+        } else {//if(txt.trim().length() >= 5)
+            
+            this.label_marca = "* " + lbl_marca + " (MÍNIMO 5 CARACTERES)";
+            return "redirect:/marca";
+            
+        }//if(txt.trim().length() >= 5)
+        
+    }//formMarca(Model model, @ModelAttribute marca mac)
     
 }

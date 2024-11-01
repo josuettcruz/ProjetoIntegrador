@@ -19,17 +19,25 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         </div><!-- div -- Topo -->
         
         <!-- div1 -- div 1 class -->
-        <div th:if="${cpro}" th:class="${div1class}">LINK PARA NOVO ITEM</div>
-        <div th:if="${cmac}" th:class="${div1class}">LINK PARA NOVO PRODUTO</div>
-        <div th:class="${div1class}">LINK PARA NOVA MARCA</div>
+        <div th:if="${cpro}" th:class="${div1class}">
+            <a th:class="${div1aclass}" th:href="@{marca}">CADASTRAR UM NOVO ITEM</a>
+        </div>
+        
+        <div th:if="${cmac}" th:class="${div1class}">
+            <a th:class="${div1aclass}" th:href="@{marca}">CADASTRAR UM PRODUTO</a>
+        </div>
+        
+        <div th:class="${div1class}">
+            <a th:class="${div1aclass}" th:href="@{marca}">CADASTRAR UMA MARCA</a>
+        </div>
         <!-- div -- Link para os formulários -->
         
         <!-- titemclass -- t - tabela -- item -- class -->
-        <table th:if="${cit}" th:class="${titemclass}">
+        <table th:if="${cit}" th:class="${tclass}">
 
             <thead>
                 
-                <tr><th colspan="3"></th></tr>
+                <tr><th colspan="3">LISTA DE PRODUTOS</th></tr>
 
                 <tr>
                     <th>CÓDIGO</th>
