@@ -8,7 +8,7 @@ import ead.senac.tds.ProjetoIntegrador.model.*;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 /**
  *
@@ -16,7 +16,12 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 
 @Controller
-public class ControllerIntro {
+public class ControllerAll {
+    
+    final String divtopclass = "container-fluid bg-primary-subtle pt-xxl-2";
+    final String divtopstyle = "padding-top: 1vh;padding-bottom:2vh";
+    final String htopclass = "text-primary-emphasis text-center";
+    final String htopstyle = "font-size: 4vw";
     
     @GetMapping("/")
     public String Index(Model model){
@@ -45,10 +50,15 @@ public class ControllerIntro {
         model.addAttribute("emac", lt.Marcas());
         
         /* Bootstrap -- div -- Topo */
-        model.addAttribute("divtopclass", "container-fluid bg-primary-subtle pt-xxl-2");
-        model.addAttribute("divtopstyle", "padding-top: 1vh;padding-bottom:2vh");
-        model.addAttribute("emac", lt.Marcas());
+        model.addAttribute("divtopclass", this.divtopclass);
+        model.addAttribute("divtopstyle", this.divtopstyle);
         /* divtopclass -- div top class */
+        
+        /* Bootstrap -- div -- h1 -- Topo */
+        model.addAttribute("htopclass", this.htopclass);
+        model.addAttribute("htopstyle", this.htopstyle);
+        model.addAttribute("emac", lt.Marcas());
+        /* htopclass -- h1 top class */
         
         /* Bootstrap -- div -- h1 -- Topo */
         model.addAttribute("htopclass", "text-primary-emphasis text-center");
@@ -68,5 +78,38 @@ public class ControllerIntro {
         return "index";
         
     }//Index(Model model)
+    
+    @GetMapping("/marca")
+    public String NovaMarca(Model model){
+        
+        Data d = new Data(Registro.Real());
+        
+        model.addAttribute("title", d.DataLinha(true) + " - " +
+                d.DataAbreviada(false));
+        
+        model.addAttribute("top", "Hoje é " + 
+                new Data().DataCompleta(true) + 
+                "!");
+        
+        /* Bootstrap -- div -- Topo */
+        model.addAttribute("divtopclass", this.divtopclass);
+        model.addAttribute("divtopstyle", this.divtopstyle);
+        model.addAttribute("htopclass", this.htopclass);
+        model.addAttribute("htopstyle", this.htopstyle);
+        /* htopclass -- h1 top class */
+        /* htopclass -- h1 top class */
+        
+        return "novamarca";
+        
+    }//Index(Model model)
+    
+    @GetMapping("/mac")
+    public String formaMarca(Model model, @ModelAttribute marca mac){
+        
+        new Arquivo().AddMarca(mac);
+        
+        return "redirect:/";
+        
+    }
     
 }
