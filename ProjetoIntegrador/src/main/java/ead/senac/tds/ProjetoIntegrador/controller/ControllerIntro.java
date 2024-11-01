@@ -32,13 +32,41 @@ public class ControllerIntro {
                 new Data().DataCompleta(true) + 
                 "!");
         
-        model.addAttribute("citen", !lt.Itens().isEmpty());
-        model.addAttribute("eiten", model);
+        //item
+        model.addAttribute("cit", !lt.Itens().isEmpty());
+        model.addAttribute("eit", lt.Itens());
         
-        model.addAttribute("localhost", Registro.Host());
+        //produto
+        model.addAttribute("cpro", !lt.Produtos().isEmpty());
+        model.addAttribute("epro", lt.Produtos());
+        
+        //marca
+        model.addAttribute("cmac", !lt.Marcas().isEmpty());
+        model.addAttribute("emac", lt.Marcas());
+        
+        /* Bootstrap -- div -- Topo */
+        model.addAttribute("divtopclass", "container-fluid bg-primary-subtle pt-xxl-2");
+        model.addAttribute("divtopstyle", "padding-top: 1vh;padding-bottom:2vh");
+        model.addAttribute("emac", lt.Marcas());
+        /* divtopclass -- div top class */
+        
+        /* Bootstrap -- div -- h1 -- Topo */
+        model.addAttribute("htopclass", "text-primary-emphasis text-center");
+        model.addAttribute("htopstyle", "font-size: 4vw");
+        /* htopclass -- h1 top class */
+        
+        /* Bootstrap -- div -- Link para os formulários */
+        model.addAttribute("div1class", "container-sm bg-success-subtle " + 
+                "border border-success my-3 p-2 " + 
+                "text-center text-black fs-3 fw-bold");
+        /* div1 -- div 1 class */
+        
+        /* Bootstrap -- table -- Lista de itens */
+        model.addAttribute("titemclass", "table table-info table-striped table-hover");
+        /* titemclass -- t - tabela -- item -- class */
         
         return "index";
         
-    }
+    }//Index(Model model)
     
 }

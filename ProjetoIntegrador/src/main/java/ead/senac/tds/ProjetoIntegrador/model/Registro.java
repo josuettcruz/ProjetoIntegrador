@@ -13,7 +13,7 @@ import java.time.LocalDate;
 public class Registro {
     
     public static LocalDate Real(){
-        return LocalDate.of(2024, 10, 31);
+        return LocalDate.of(2024, 11, 1);
     }
     
     public static String Host(){
