@@ -47,6 +47,17 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
             
         </div><!-- div -- container -->
         
+        <div th:class="${div_container}" th:if="${com_mac}">
+            
+            <div th:class="${div_row}" th:each="mac : ${marca}">
+                <div th:class="${div_col}">
+                    <button th:class="${button}" th:text="${mac.ReturnId()}" />
+                </div>
+                <div th:class="${div_col}" th:each="mc : ${mac.Read()}" th:text="${mc}" />
+            </div>
+            
+        </div>
+        
         <script>
             
             function Cancel(){

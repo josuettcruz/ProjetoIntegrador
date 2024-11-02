@@ -136,4 +136,24 @@ public class marca {
         
     }//AddAll(String txt, char sep)
     
+    public String ReturnId(){
+        
+        String txt = "Nº ";
+        
+        if(this.id < 10){
+            txt += "000";
+            txt += this.id;
+        } else if(this.id < 100){
+            txt += "00";
+            txt += this.id;
+        } else if(this.id < 1000){
+            txt += this.id;
+        } else {
+            txt += "+999";
+        }
+        
+        return txt;
+        
+    }//ReturnId()
+    
 }

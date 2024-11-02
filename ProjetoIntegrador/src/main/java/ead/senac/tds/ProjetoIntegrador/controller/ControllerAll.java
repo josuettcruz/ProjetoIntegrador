@@ -5,6 +5,7 @@
 package ead.senac.tds.ProjetoIntegrador.controller;
 
 import ead.senac.tds.ProjetoIntegrador.model.*;
+import java.util.List;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -118,6 +119,18 @@ public class ControllerAll {
         model.addAttribute("submit", "btn btn-outline-success btn-lg mt-2");
         model.addAttribute("reset", "btn btn-outline-danger btn-lg mt-2");
         model.addAttribute("cancel", "btn btn-outline-warning btn-lg mt-2");
+        
+        //Listagem de marcas
+        List<marca> mac = new Arquivo().Arq().Marcas();
+        model.addAttribute("com_mac", !mac.isEmpty());
+        model.addAttribute("marca", mac);
+        
+        // Bootstrap
+        model.addAttribute("div_container", "container-fluid " + 
+                "bg-success-subtle mt-xxl-5 p-xxl-5");
+        model.addAttribute("div_row", "d-flex flex-column my-xxl-5");
+        model.addAttribute("div_col", "p-2 text-black text-start");
+        model.addAttribute("button", "btn btn-primary active");
         
         return "novamarca";
         
