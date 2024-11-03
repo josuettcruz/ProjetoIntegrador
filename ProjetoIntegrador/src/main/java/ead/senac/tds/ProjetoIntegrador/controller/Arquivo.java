@@ -348,18 +348,19 @@ public class Arquivo{
             
             csv del = new csv(files_marca);
             
+            valid = false;
+            
             for(int x = 0; x < l.Marcas().size(); x++){
                 
-                if(l.Marcas().get(x).getId() == x){
+                if(l.Marcas().get(x).getId() == cod){
                     
                     del.Remove(x);
+                    valid = true;
                     
                 }
                 
             }
             
-        } else {
-            valid = false;
         }
         
         return valid;
@@ -398,18 +399,19 @@ public class Arquivo{
             
             csv del = new csv(files_produto);
             
+            valid = false;
+            
             for(int x = 0; x < l.Produtos().size(); x++){
                 
-                if(l.Produtos().get(x).getId() == x){
+                if(l.Produtos().get(x).getId() == cod){
                     
                     del.Remove(x);
+                    valid = true;
                     
                 }
                 
             }
             
-        } else {
-            valid = false;
         }
         
         return valid;
