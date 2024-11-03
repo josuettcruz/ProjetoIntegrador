@@ -14,18 +14,40 @@ import java.util.List;
  */
 public class marca {
     
+    private int contains;
+    
     private int id;
     private List<String> detals;
     
     public marca(){
+        
+        this.contains = 0;
+        
         this.id = 0;
         this.detals = new ArrayList<>();
-    }
+        
+    }//marca()
     
     public marca(String txt){
+        
+        this.contains = 0;
+        
         this.id = 0;
         this.detals = new ArrayList<>();
         this.detals.add(txt);
+        
+    }//marca(String txt)
+    
+    public void Content(){
+        this.contains++;
+    }
+    
+    public int isProduto(){
+        return this.contains;
+    }
+    
+    public boolean notProdutos(){
+        return this.contains == 0;
     }
     
     public void setId(int id){

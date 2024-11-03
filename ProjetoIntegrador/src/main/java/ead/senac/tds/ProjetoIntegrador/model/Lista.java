@@ -40,17 +40,17 @@ public class Lista {
         produto pro = produto;
         pro.setId(this.produtos.size() + 1);
         
-        for(marca m : marcas){
+        for(int i = 0; i < this.marcas.size(); i++){
             
-            if(m.getId() == cod){
+            if(this.marcas.get(i).getId() == cod){
                 
-                pro.setMarca(m);
+                pro.setMarca(this.marcas.get(i));
+                this.marcas.get(i).Content();
                 valid = true;
-                break;
                 
             }
             
-        }//for(marca m : marcas)
+        }//for(int i = 0; i < this.marcas.size(); i++)
         
         if(valid){
             this.produtos.add(pro);
@@ -67,11 +67,12 @@ public class Lista {
         item it = item;
         it.setId(this.itens.size() + 1);
         
-        for(produto p : produtos){
+        for(int i = 0; i < this.produtos.size(); i++){
             
-            if(p.getId() == cod){
+            if(this.produtos.get(i).getId() == cod){
                 
-                it.setProduto(p);
+                it.setProduto(this.produtos.get(i));
+                this.produtos.get(i).Content();
                 valid = true;
                 break;
                 
@@ -85,7 +86,7 @@ public class Lista {
         
         return valid;
         
-    }//public boolean newItem(item item, int cod)
+    }//newItem(item item, int cod)
     
     public List<marca> Marcas(){
         return this.marcas;

@@ -10,14 +10,32 @@ package ead.senac.tds.ProjetoIntegrador.model;
  */
 public class produto {
     
+    private int contains;
+    
     private int id;
     private String desc;
     private marca marca;
     
     public produto(){
+        
+        this.contains = 0;
+        
         this.id = 0;
         this.desc = "";
         this.marca = new marca();
+        
+    }//produto()
+    
+    public void Content(){
+        this.contains ++;
+    }
+    
+    public int isItem(){
+        return this.contains;
+    }
+    
+    public boolean notItens(){
+        return this.contains == 0;
     }
     
     public void setId(int id){

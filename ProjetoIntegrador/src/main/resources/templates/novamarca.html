@@ -5,7 +5,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
 -->
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title th:text="${title}">TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -49,24 +49,38 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         
         <div th:class="${div_container}" th:if="${com_mac}">
             
-            <div th:class="${div_row}" th:each="mac : ${marca}">
-                <div th:class="${div_col}">
-                    <button th:class="${button}" th:text="${mac.ReturnId()}" />
+            <div th:class="${div_title}" th:each="mac : ${marca}">
+                
+                <div th:class="${div_row}">
+                    
+                    <div th:class="${col}" th:text="${mac.ReturnId()}" />
+                    
+                    <div th:if="${mac.notProdutos()}" th:class="${col}">
+                        <a th:href="'del_mac?cod=' + ${mac.getId()}" th:class="${del_class}" th:style="${del_style}">delet</a>
+                        <!--<button th:name="${mac.getId()}" th:class="${del_class}" th:style="${del_style}">APAGAR</button>-->
+                    </div><!--div th:class="${col}"-->
+                    
+                </div><!--div th:class="${row}""-->
+                    
+                <div th:class="${div_text}" th:each="mc : ${mac.Read()}">
+                    <p th:class="${text}" th:text="${mc}" />
                 </div>
-                <div th:class="${div_col}" th:each="mc : ${mac.Read()}" th:text="${mc}" />
-            </div>
+                
+            </div><!--div th:class="${div_container}" th:if="${com_mac}"-->
             
-        </div>
+        </div><!--div th:class="${div_title}" th:each="mac : ${marca}"-->
         
         <script>
             
             function Cancel(){
                 
+                const home = document.querySelector("doc").innerText;
+                
                 const campo = document.getElementById("cp");
                 
-                if(campo.value.trim() == ""){
+                if(campo.value.trim() === ""){
                 
-                    window.open(document.querySelector("doc").innerText,"_parent");
+                    window.open(home,"_parent");
                 
                 } else {
                     
@@ -75,6 +89,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                 }
                 
             };
+            
+            function Click(click){
+                
+                window.open(home + "delmarca?cod=" + click,"_parent");
+                
+            }
             
         </script>
         
