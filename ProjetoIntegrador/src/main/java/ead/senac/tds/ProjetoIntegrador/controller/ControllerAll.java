@@ -147,17 +147,18 @@ public class ControllerAll {
         model.addAttribute("div_title", "d-block pb-5 " + 
                 "border-bottom border-5 border-success");
         
-        model.addAttribute("div_row", "row justify-content-between");
+        model.addAttribute("div_row", "row row-cols-2 justify-content-between");
         
-        model.addAttribute("col", "pe-5 col text_black fs-2 fw-bold");
+        model.addAttribute("col1", "bg-info " + 
+                "pe-5 col text-center text_black fs-2 fw-bold");
+        
+        model.addAttribute("col2", "bg-danger " + 
+                "pe-5 col text-center text_black fs-2 fw-bold");
         
         model.addAttribute("div_text", "d-block pt-5 " + 
                 "border-top border-5 border-success");
         
         model.addAttribute("text", "pt-5 text-black text-start fs-3 fw-medium");
-        
-        model.addAttribute("del_class", "btn btn-danger");
-        model.addAttribute("del_style", "width: 100%;magin-bottom:15%");
         
         return "novamarca";
         
@@ -211,5 +212,90 @@ public class ControllerAll {
         }//if(value)
         
     }//formMarca(Model model, @ModelAttribute marca mac)
+    
+    @GetMapping("/mac_view")
+    public String editarMarca(Model model, String cod){
+        
+        boolean acept = false;
+        
+        List<marca> lista = new Arquivo().Arq().Marcas();
+        
+        Page("mac_view");
+        
+        Data d = new Data(Registro.Real());
+        
+        model.addAttribute("title", d.DataAbreviada(false));
+        
+        marca mac = new marca();
+        
+        Numero doc = new Numero(cod);
+        
+        if(doc.Val()){
+            
+            for(marca mc : lista){
+                
+                if(mc.getId() == doc.Num()){
+                    
+                    mac = mc;
+                    acept = true;
+                    break;
+                    
+                }//if(mc.getId() == doc.Num())
+                
+            }//for(marca mc : lista)
+            
+        }//if(doc.Val())
+        
+        model.addAttribute("form_type_hidden", mac.getId());
+        model.addAttribute("value", mac.Read().get(mac.Read().size()-1));
+        model.addAttribute("text", mac.Read());
+        
+        if(acept){
+            return "editmarca";
+        } else {
+            return "redirect:/marca";
+        }
+        
+    }//editarMarca(Model model, String cod)
+    
+    @GetMapping("/mac_modify")
+    public String formEditarMarca(Model model, String id, String txt){
+        
+        boolean valid = false;
+        
+        List<marca> lista = new Arquivo().Arq().Marcas();
+        
+        Numero doc = new Numero(id);
+        
+        marca marca = new marca();
+        
+        if(doc.Val()){
+            
+            for(marca mac : lista){
+                
+                if(mac.getId() == doc.Num()){
+                    
+                    marca = mac;
+                    valid = true;
+                    break;
+                    
+                }//if(mac.getId() == doc.Num())
+                
+            }//for(marca mac : lista)
+            
+        }//if(doc.Val())
+        
+        if(valid){
+            
+            marca.Add(txt);
+            new Arquivo().AlterMarca(marca, doc.Num());
+            
+            //return "redirect:/mac_view?cod=" + id;
+            
+        }
+        
+        return "redirect:/mac_view?cod=" + id;
+        
+    }
     
 }

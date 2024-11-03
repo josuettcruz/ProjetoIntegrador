@@ -9,6 +9,24 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <style>
+            a:link{
+              color: inherit;
+              text-decoration: inherit;
+            }
+            a:hover{
+              color: inherit;
+              text-decoration: inherit;
+            }
+            a:active{
+              color: inherit;
+              text-decoration: inherit;
+            }
+            a:visited{
+              color: inherit;
+              text-decoration: inherit;
+            }
+        </style>
     </head>
     <body>
         
@@ -53,12 +71,13 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                 
                 <div th:class="${div_row}">
                     
-                    <div th:class="${col}" th:text="${mac.ReturnId()}" />
+                    <div th:class="${col1}">
+                        <a th:href="'mac_view?cod=' + ${mac.getId()}" th:text="${mac.ReturnId()}" />
+                    </div>
                     
-                    <div th:if="${mac.notProdutos()}" th:class="${col}">
-                        <a th:href="'del_mac?cod=' + ${mac.getId()}" th:class="${del_class}" th:style="${del_style}">delet</a>
-                        <!--<button th:name="${mac.getId()}" th:class="${del_class}" th:style="${del_style}">APAGAR</button>-->
-                    </div><!--div th:class="${col}"-->
+                    <div th:if="${mac.notProdutos()}" th:class="${col2}">
+                        <a th:href="'del_mac?cod=' + ${mac.getId()}">APAGAR</a>
+                    </div>
                     
                 </div><!--div th:class="${row}""-->
                     
