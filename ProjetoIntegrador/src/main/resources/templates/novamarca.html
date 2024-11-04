@@ -38,7 +38,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         </div><!-- div -- Topo -->
         
         <!-- divclass -- div container class -->
-        <div th:class="${div_container}">
+        <div th:class="${div_form}">
             
             <div th:class="${div_row}">
             
@@ -63,7 +63,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                 
             </div>
             
-        </div><!-- div -- container -->
+        </div><!-- div_form -->
         
         <div th:class="${div_container}" th:if="${com_mac}">
             
@@ -79,17 +79,19 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                         <a th:href="'del_mac?cod=' + ${mac.getId()}">APAGAR</a>
                     </div>
                     
-                </div><!--div th:class="${row}""-->
+                </div><!-- div_row -->
                     
                 <div th:class="${div_text}" th:each="mc : ${mac.Read()}">
                     <p th:class="${text}" th:text="${mc}" />
-                </div>
+                </div><!-- div_text -->
                 
-            </div><!--div th:class="${div_container}" th:if="${com_mac}"-->
+            </div><!-- div_title -->
             
-        </div><!--div th:class="${div_title}" th:each="mac : ${marca}"-->
+        </div><!-- div_container -->
         
         <script>
+            
+            
             
             function Cancel(){
                 
@@ -109,11 +111,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                 
             };
             
-            /*function Click(click){
+            document.querySelector("form").addEventListener("submit", function(){
                 
-                window.open(home + "delmarca?cod=" + click,"_parent");
+                const dados = document.getElementById("cp").value.trim();
+                document.getElementById("cp").value = dados.toUpperCase();
                 
-            }*/
+            });
             
         </script>
         

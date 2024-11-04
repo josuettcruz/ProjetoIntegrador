@@ -5,7 +5,6 @@
 package ead.senac.tds.ProjetoIntegrador.controller;
 
 import ead.senac.tds.ProjetoIntegrador.model.*;
-import java.time.LocalTime;
 import java.util.List;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
@@ -20,7 +19,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 @Controller
 public class ControllerAll {
     
-    final String divtopclass = "container-fluid bg-primary-subtle pt-xxl-2";
+    final String divtopclass = "container-fluid bg-primary-subtle pt-xxl-2 " + 
+            "d-print-none";
     final String divtopstyle = "padding-top: 1vh;padding-bottom:2vh";
     final String htopclass = "text-primary-emphasis text-center";
     final String htopstyle = "font-size: 4vw";
@@ -83,8 +83,14 @@ public class ControllerAll {
         /* Bootstrap -- div -- Topo */
         
         /* Bootstrap -- div -- Link para os formulários */
-        model.addAttribute("div1class", "container-sm bg-success-subtle " + 
-                "border border-success my-3 p-2");
+        String div1class = "container-sm bg-success-subtle ";
+        div1class += "border border-success my-3 p-2";
+        
+        if(!lt.Produtos().isEmpty()){
+            div1class += " d-print-none";
+        }
+        
+        model.addAttribute("div1class", div1class);
         model.addAttribute("div1aclass", "link-dark link-offset-1 " + 
                 "link-underline link-underline-opacity-0 " + 
                 "link-underline-opacity-75-hover " + 
@@ -123,7 +129,12 @@ public class ControllerAll {
         model.addAttribute("htopstyle", this.htopstyle);
         /* Bootstrap -- div -- Topo */
         
-        model.addAttribute("div_container", "container-fluid mt-5 p-2 bg-success-subtle");
+        model.addAttribute("div_form", "container-fluid mt-5 p-2 " + 
+                "bg-success-subtle d-print-none");
+        
+        model.addAttribute("div_container", "container-fluid mt-5 p-2 " + 
+                "bg-success-subtle");
+        
         model.addAttribute("div_row", "row row-cols-2");
         model.addAttribute("div_col", "col-sm");
         model.addAttribute("lbl", this.label_marca);
@@ -216,7 +227,7 @@ public class ControllerAll {
         
     }//formMarca(Model model, @ModelAttribute marca mac)
     
-    //editmarca - formulário
+    //editmarca - página
     @GetMapping("/mac_view")
     public String editarMarca(Model model, String cod){
         
@@ -229,6 +240,27 @@ public class ControllerAll {
         model.addAttribute("top", "Hoje é " + 
                 new Data().DataCompleta(true) + 
                 "!");
+        
+        /* Bootstrap -- div -- Topo */
+        model.addAttribute("divtopclass", this.divtopclass);
+        model.addAttribute("divtopstyle", this.divtopstyle);
+        model.addAttribute("htopclass", this.htopclass);
+        model.addAttribute("htopstyle", this.htopstyle);
+        /* Bootstrap -- div -- Topo */
+        
+        model.addAttribute("div_form", "container-xxl mt-xxl-5 " + 
+                "bg-warning-subtle d-print-none");
+        
+        model.addAttribute("form_control", "form-control form-control-lg");
+        model.addAttribute("button_submit", "btn btn-success btn-lg");
+        model.addAttribute("button_return", "btn btn-warning btn-lg");
+        model.addAttribute("button_clear", "btn btn-danger btn-lg");
+        
+        model.addAttribute("list_container", "container-xxl mt-xxl-5 mb-sm-2 " + 
+                "bg-dark-subtle");
+        
+        model.addAttribute("list", "my-5 ps-xxl-2 text-body-emphasis " + 
+                "text-break fs-3 fw-semibold");
         
         boolean acept = false;
         
@@ -365,6 +397,6 @@ public class ControllerAll {
     }//formEditarMarca(Model model, String id, String txt)
     
     //listprodutos -- página
-    //@GetMapping("/... [11:02 04/11/2024]
+    //@GetMapping("/... [12:12 04/11/2024]
     
 }

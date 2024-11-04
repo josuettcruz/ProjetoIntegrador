@@ -20,26 +20,26 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
             <h1 th:text="${top}" th:class="${htopclass}" th:style="${htopstyle}" />
         </div><!-- div -- Topo -->
         
-        <div>
+        <div th:class="${div_form}">
             
             <form th:action="@{/mac_modify}" onsubmit="return Submit()" method="GET">
                 
                 <input type="hidden" name="id" th:value="${form_type_hidden}" />
                 
-                <input id="val" type="text" name="txt" th:value="${value}" />
+                <input th:class="${form_control}" id="val" type="text" name="txt" th:value="${value}" />
                 
-                <input type="submit" value="SALVAR" />
+                <input th:class="${button_submit}" type="submit" value="SALVAR" />
                 
             </form>
             
-            <button onclick="Host()">VOLTAR</button>
-            <button onclick="Reset()">LIMPAR HISTÓRICO</button>
+            <button th:class="${button_return}" onclick="Host()">VOLTAR</button>
+            <button th:class="${button_clear}" onclick="Reset()">LIMPAR HISTÓRICO</button>
             
         </div>
         
-        <div>
+        <div th:class="${list_container}">
             
-            <div th:each="mc : ${text}" th:text="${mc}" />
+            <p th:class="${list}" th:each="mc : ${text}" th:text="${mc}" />
             
         </div>
         
@@ -58,19 +58,31 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
             
             function Submit(){
                 
-                const dg = document.getElementById("val").value;
+                const dg = document.getElementById("val").value.trim();
                 
-                if(dg.trim() === "" || dg.length <= 5){
+                if(dg === ""){
                     
+                    alert("Preencha o campo!");
+                    document.getElementById("val").value = "";
                     document.getElementById("val").focus();
                     
                     return false;
                     
-                } else {
+                } else if(dg.length < 5){//if(dg === "")
+                    
+                    alert("Pelo menos, 5 caracteres!");
+                    document.getElementById("val").value = dg;
+                    document.getElementById("val").focus();
+                    
+                    return false;
+                    
+                } else {//if(dg === "")
+                    
+                    document.getElementById("val").value = dg.toUpperCase();
                     
                     return true;
                     
-                }
+                }//if(dg === "")
                 
             }//Submit()
             

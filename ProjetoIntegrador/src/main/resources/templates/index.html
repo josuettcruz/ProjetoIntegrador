@@ -37,7 +37,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
 
             <thead>
                 
-                <tr><th colspan="3">LISTA DE PRODUTOS</th></tr>
+                <tr><th class="text-center" colspan="3">LISTA DE PRODUTOS</th></tr>
 
                 <tr>
                     <th>CÓDIGO</th>
@@ -52,7 +52,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                 <tr th:each="it : ${eit}" th:if="${it.getDesc().getStatus() == 1}">
                     <td th:text="${it.getNome()}" />
                     <td th:text="${it.getProduto().getNome()}" />
-                    <td th:text="${it.getDesc.getData().DataLinha(true)}" />
+                    <td class="d-print-none" th:text="${it.getDesc.getData().DataLinha(true)}" />
+                    <td class="d-none d-print-block" th:text="${it.getDesc.getData().DataAbreviada(true)}" />
                 </tr>
                 
             </tbody>
