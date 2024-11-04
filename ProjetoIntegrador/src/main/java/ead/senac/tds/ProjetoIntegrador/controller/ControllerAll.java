@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 @Controller
 public class ControllerAll {
     
-    final String divtopclass = "container-fluid bg-primary-subtle pt-xxl-2 " + 
+    final String divtopclass = "container-fluid bg-primary-subtle pt-2 " + 
             "d-print-none";
     final String divtopstyle = "padding-top: 1vh;padding-bottom:2vh";
     final String htopclass = "text-primary-emphasis text-center";
@@ -154,7 +154,7 @@ public class ControllerAll {
         
         // Bootstrap -- tabela com a lista de marcas
         model.addAttribute("div_container", "container-fluid " + 
-                "bg-success-subtle mt-xxl-5 py-xxl-5");
+                "bg-success-subtle mt-5 py-5");
         
         model.addAttribute("div_title", "d-block pb-5 " + 
                 "border-bottom border-5 border-success");
@@ -248,7 +248,7 @@ public class ControllerAll {
         model.addAttribute("htopstyle", this.htopstyle);
         /* Bootstrap -- div -- Topo */
         
-        model.addAttribute("div_form", "container-xxl mt-xxl-5 " + 
+        model.addAttribute("div_form", "container-xxl mt-5 py-2 py-xxl-5 " + 
                 "bg-warning-subtle d-print-none");
         
         model.addAttribute("form_control", "form-control form-control-lg");
@@ -256,11 +256,15 @@ public class ControllerAll {
         model.addAttribute("button_return", "btn btn-warning btn-lg");
         model.addAttribute("button_clear", "btn btn-danger btn-lg");
         
-        model.addAttribute("list_container", "container-xxl mt-xxl-5 mb-sm-2 " + 
+        model.addAttribute("list_container", "container-xxl my-5 py-3 " + 
                 "bg-dark-subtle");
         
-        model.addAttribute("list", "my-5 ps-xxl-2 text-body-emphasis " + 
-                "text-break fs-3 fw-semibold");
+        model.addAttribute("list_title", "my-2 text-center " + 
+                "text-primary-emphasis fs-1 fw-bold " + 
+                "d-none d-print-block");
+        
+        model.addAttribute("list", "my-2 my-xxl-5 ps-5 ps-xxl-2 pt-5 pt-xxl-2 " + 
+                "text-body-emphasis text-break fs-3 fw-semibold");
         
         boolean acept = false;
         
@@ -292,6 +296,7 @@ public class ControllerAll {
         model.addAttribute("form_type_hidden", mac.getId());
         model.addAttribute("value", mac.Read().get(mac.Read().size()-1));
         model.addAttribute("text", mac.Read());
+        model.addAttribute("number", "MARCA [" + mac.ReturnId() + "]");
         
         //formClearMarca(Model model, String id)
         model.addAttribute("reset", Registro.Host() + 
@@ -397,6 +402,6 @@ public class ControllerAll {
     }//formEditarMarca(Model model, String id, String txt)
     
     //listprodutos -- página
-    //@GetMapping("/... [12:12 04/11/2024]
+    //@GetMapping("/...
     
 }

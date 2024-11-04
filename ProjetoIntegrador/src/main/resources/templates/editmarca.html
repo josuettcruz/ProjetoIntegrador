@@ -39,6 +39,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         
         <div th:class="${list_container}">
             
+            <p th:class="${list_title}" th:text="${number}" />
+            
             <p th:class="${list}" th:each="mc : ${text}" th:text="${mc}" />
             
         </div>
