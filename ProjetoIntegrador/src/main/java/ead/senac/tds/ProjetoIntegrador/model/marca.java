@@ -18,11 +18,12 @@ public class marca {
     
     private int id;
     private List<String> detals;
+    private String nome;
     
     public marca(){
         
         this.contains = 0;
-        
+        this.nome = "Sem Nome";
         this.id = 0;
         this.detals = new ArrayList<>();
         
@@ -31,7 +32,7 @@ public class marca {
     public marca(String txt){
         
         this.contains = 0;
-        
+        this.nome = txt;
         this.id = 0;
         this.detals = new ArrayList<>();
         this.detals.add(txt);
@@ -65,6 +66,7 @@ public class marca {
         }
         
         this.detals.add(txt);
+        this.nome = txt;
         
     }//Add(String txt, boolean add)
     
@@ -74,22 +76,12 @@ public class marca {
         
     }
     
-    public int Max(){
-        return this.detals.size();
+    public String Text(){
+        return this.nome;
     }
     
-    public String Read(int num){
-        
-        String txt = "";
-        
-        if(num >= 0 && num < this.detals.size() && !this.detals.isEmpty()){
-            
-            txt = this.detals.get(num);
-            
-        }
-        
-        return txt;
-        
+    public int Max(){
+        return this.detals.size();
     }
     
     public boolean Clear(){
@@ -106,7 +98,7 @@ public class marca {
         
     }//Clear()
     
-    public boolean Remove(int num){
+    /*public boolean Remove(int num){
         
         boolean valid = true;
         
@@ -122,7 +114,7 @@ public class marca {
         
         return valid;
         
-    }//Remove(int num)
+    }/*Remove(int num)*/
     
     private boolean AddAll(String txt, String sep){
         

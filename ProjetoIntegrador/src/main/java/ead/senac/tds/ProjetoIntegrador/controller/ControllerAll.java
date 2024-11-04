@@ -401,7 +401,91 @@ public class ControllerAll {
         
     }//formEditarMarca(Model model, String id, String txt)
     
-    //listprodutos -- página
-    //@GetMapping("/...
+    //novoproduto -- página
+    @GetMapping("/produtos")
+    public String AddProduto(Model model){
+        
+        Page("index");
+        
+        Data d = new Data(Registro.Real());
+        
+        model.addAttribute("title", d.DataAbreviada(false));
+        
+        model.addAttribute("top", "Hoje é " + 
+                new Data().DataCompleta(true) + 
+                "!");
+        
+        model.addAttribute("divtopclass", this.divtopclass);
+        model.addAttribute("divtopstyle", this.divtopstyle);
+        model.addAttribute("htopclass", this.htopclass);
+        model.addAttribute("htopstyle", this.htopstyle);
+        model.addAttribute("htopclass", "text-primary-emphasis text-center");
+        model.addAttribute("htopstyle", "font-size: 4vw");
+        /* Bootstrap -- div -- Topo */
+        
+        Lista lt = new Arquivo().Arq();
+        
+        //Form
+        model.addAttribute("cancel", Registro.Host());
+        model.addAttribute("mac", lt.Marcas());
+        
+        //Form -- Bootstrap
+        model.addAttribute("div_form", "container-fluid my-5 my-sm-2 " + 
+                "bg-success-subtle " + 
+                "d-print-none");
+        
+        model.addAttribute("input_text", "form-control");
+        model.addAttribute("input_select", "form-select d-block");
+        model.addAttribute("btn_submit", "btn btn-success btn-lg d-block");
+        model.addAttribute("btn_cancel", "btn btn-warning btn-lg d-block");
+        
+        //Lista
+        model.addAttribute("listar", lt.Produtos());
+        
+        //Form -- Bootstrap
+        model.addAttribute("div_lista", "container-fluid my-5 my-xxl-2");
+        model.addAttribute("lista", "ps-5 ps-xxl-2 py-5 py-lg-2");
+        model.addAttribute("lista_link", "link-secondary display-2 fw-bold " + 
+                "text-center");
+        
+        model.addAttribute("lista_p", "text-success-emphasis fs-4 fw-medium");
+        
+        return "novoproduto";
+        
+    }//AddProduto(Model model)
+    
+    //novoproduto -- formulário
+    @GetMapping("/add_pro")
+    public String formAddProduto(Model model, String desc, String mac){
+        
+        Form("add_pro");
+        
+        Lista lt = new Arquivo().Arq();
+        
+        Numero num = new Numero(mac);
+        
+        if(num.Val()){
+            
+            produto pro = new produto();
+            pro.setDesc(desc);
+            
+            for(marca mc : lt.Marcas()){
+                
+                if(mc.getId() == num.Num()){
+                    
+                    pro.setMarca(mc);
+                    break;
+                    
+                }//if(mc.getId() == num.Num())
+                
+            }//for(marca mc : lt.Marcas())
+            
+            new Arquivo().addProduto(pro);
+            
+        }//if(num.Val())
+        
+        return "redirect:/";
+        
+    }//formAddProduto(Model model, String desc, String mac)
     
 }
