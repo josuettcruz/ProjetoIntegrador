@@ -204,7 +204,7 @@ public class Arquivo{
             
         }while(num <= 0 && i < document.Marcas().size());
         
-        if(num > 0 && mac.Max() > 0){
+        if(num >= 0 && mac.Max() > 0){
             
             csv doc = new csv(files_marca);
 
@@ -243,7 +243,7 @@ public class Arquivo{
             
         }while(num <= 0 && i < document.Produtos().size());
         
-        if(num > 0){
+        if(num >= 0){
             
             csv doc = new csv(files_produto);
 
@@ -288,7 +288,7 @@ public class Arquivo{
             
         }while(num <= 0 && i < document.Itens().size());
         
-        if(num > 0){
+        if(num >= 0){
             
             csv doc = new csv(files_item);
 

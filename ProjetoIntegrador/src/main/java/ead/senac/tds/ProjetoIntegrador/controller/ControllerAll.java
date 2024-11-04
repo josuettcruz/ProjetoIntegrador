@@ -405,7 +405,7 @@ public class ControllerAll {
     @GetMapping("/produtos")
     public String AddProduto(Model model){
         
-        Page("index");
+        Page("produtos");
         
         Data d = new Data(Registro.Real());
         
@@ -421,7 +421,6 @@ public class ControllerAll {
         model.addAttribute("htopstyle", this.htopstyle);
         model.addAttribute("htopclass", "text-primary-emphasis text-center");
         model.addAttribute("htopstyle", "font-size: 4vw");
-        /* Bootstrap -- div -- Topo */
         
         Lista lt = new Arquivo().Arq();
         
@@ -430,25 +429,29 @@ public class ControllerAll {
         model.addAttribute("mac", lt.Marcas());
         
         //Form -- Bootstrap
-        model.addAttribute("div_form", "container-fluid my-5 my-sm-2 " + 
+        model.addAttribute("div_form", "container-fluid my-5 " + 
                 "bg-success-subtle " + 
                 "d-print-none");
         
-        model.addAttribute("input_text", "form-control");
-        model.addAttribute("input_select", "form-select d-block");
-        model.addAttribute("btn_submit", "btn btn-success btn-lg d-block");
-        model.addAttribute("btn_cancel", "btn btn-warning btn-lg d-block");
+        model.addAttribute("input_text", "form-control py-2");
+        model.addAttribute("input_select", "form-select d-block py-2");
+        model.addAttribute("btn_submit", "d-inline btn btn-success btn-lg " + 
+                "my-2 my-sm-5 p-2");
+        model.addAttribute("btn_cancel", "d-inline btn btn-warning btn-lg " + 
+                "my-2 my-xl-5 p-2");
         
         //Lista
         model.addAttribute("listar", lt.Produtos());
         
         //Form -- Bootstrap
-        model.addAttribute("div_lista", "container-fluid my-5 my-xxl-2");
-        model.addAttribute("lista", "ps-5 ps-xxl-2 py-5 py-lg-2");
+        model.addAttribute("div_lista", "container-fluid bg-info-subtle " + 
+                "my-2 my-sm-5 py-5");
+        model.addAttribute("div_link", "mt-5");
         model.addAttribute("lista_link", "link-secondary display-2 fw-bold " + 
                 "text-center");
         
-        model.addAttribute("lista_p", "text-success-emphasis fs-4 fw-medium");
+        model.addAttribute("lista_p", "text-success-emphasis fs-4 fw-medium" + 
+                "mt-2 mt-lg-5");
         
         return "novoproduto";
         

@@ -31,18 +31,18 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                 </select>
                 
                 <input th:class="${btn_submit}" type="submit" value="SALVAR" />
+            
+                <button th:class="${btn_cancel}" onclick="Cancel()">Cancelar</button>
                 
             </form>
-            
-            <button th:text="{btn_cancel}" onclick="Cancel()">Cancelar</button>
             
         </div>
         
         <div th:class="${div_lista}">
             
-            <div th:class="${lista}" th:each="p : ${listar}">
+            <div th:each="p : ${listar}">
                 
-                <div>
+                <div th:class="${div_link}">
                     <a th:href="@{/}" th:class="${lista_link}" th:text="${p.ReturnId()}" />
                 </div>
                 
@@ -58,11 +58,15 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         
         <script>
             
+            var btn = false;
+            
             function Cancel(){
                 
                 const home = document.querySelector("host").innerText;
                 
-                window.open(home,"_parent");
+                btn = true;
+                
+                //window.open(home,"_parent");
                 
             }//Cancel()
             
@@ -71,7 +75,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                 const text = document.getElementById("txt").value.trim();
                 const select = document.getElementById("cel").value;
                 
-                if(text === ""){
+                if(btn){
+                    
+                    window.open(document.querySelector("host").innerText,"_parent");
+                    return false;
+                    
+                } else if(text === ""){
                     
                     alert("Preencha o nome do produto!");
                     document.getElementById("txt").focus();
