@@ -58,9 +58,15 @@ public class marca {
         return this.id;
     }
     
-    public void Add(String txt){
+    public void Add(String txt, boolean add){
+        
+        if(!add){
+            this.detals.clear();
+        }
+        
         this.detals.add(txt);
-    }
+        
+    }//Add(String txt, boolean add)
     
     public List<String> Read(){
         

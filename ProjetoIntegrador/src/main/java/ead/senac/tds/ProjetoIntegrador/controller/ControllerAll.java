@@ -49,13 +49,13 @@ public class ControllerAll {
         
         Data d = new Data(Registro.Real());
         
-        Lista lt = new Arquivo().Arq();
-        
         model.addAttribute("title", d.DataAbreviada(false));
         
         model.addAttribute("top", "Hoje é " + 
                 new Data().DataCompleta(true) + 
                 "!");
+        
+        Lista lt = new Arquivo().Arq();
         
         //item
         model.addAttribute("cit", !lt.Itens().isEmpty());
@@ -100,6 +100,7 @@ public class ControllerAll {
         
     }//Index(Model model)
     
+    //novamarca - página
     @GetMapping("/marca")
     public String NovaMarca(Model model){
         
@@ -164,6 +165,7 @@ public class ControllerAll {
         
     }//Index(Model model)
     
+    //novamarca - formulário
     @GetMapping("/mac")
     public String formMarca(Model model, String txt){
         
@@ -184,6 +186,7 @@ public class ControllerAll {
         
     }//formMarca(Model model, @ModelAttribute marca mac)
     
+    //novamarca - formulário
     @GetMapping("/del_mac")
     public String delMarca(Model model, String cod){
         
@@ -213,18 +216,26 @@ public class ControllerAll {
         
     }//formMarca(Model model, @ModelAttribute marca mac)
     
+    //editmarca - formulário
     @GetMapping("/mac_view")
     public String editarMarca(Model model, String cod){
-        
-        boolean acept = false;
-        
-        List<marca> lista = new Arquivo().Arq().Marcas();
         
         Page("mac_view");
         
         Data d = new Data(Registro.Real());
         
         model.addAttribute("title", d.DataAbreviada(false));
+        
+        model.addAttribute("top", "Hoje é " + 
+                new Data().DataCompleta(true) + 
+                "!");
+        
+        boolean acept = false;
+        
+        List<marca> lista = new Arquivo().Arq().Marcas();
+        
+        model.addAttribute("title", d.DataAbreviada(false));
+        model.addAttribute("host", Registro.Host() + "marca");
         
         marca mac = new marca();
         
@@ -250,6 +261,11 @@ public class ControllerAll {
         model.addAttribute("value", mac.Read().get(mac.Read().size()-1));
         model.addAttribute("text", mac.Read());
         
+        //formClearMarca(Model model, String id)
+        model.addAttribute("reset", Registro.Host() + 
+                "mac_clear?id=" + 
+                mac.getId());
+        
         if(acept){
             return "editmarca";
         } else {
@@ -258,8 +274,11 @@ public class ControllerAll {
         
     }//editarMarca(Model model, String cod)
     
+    //editmarca - formulário
     @GetMapping("/mac_modify")
     public String formEditarMarca(Model model, String id, String txt){
+        
+        Form("mac_modify");
         
         boolean valid = false;
         
@@ -287,7 +306,7 @@ public class ControllerAll {
         
         if(valid){
             
-            marca.Add(txt);
+            marca.Add(txt, true);
             new Arquivo().AlterMarca(marca, doc.Num());
             
             //return "redirect:/mac_view?cod=" + id;
@@ -296,6 +315,56 @@ public class ControllerAll {
         
         return "redirect:/mac_view?cod=" + id;
         
-    }
+    }//formEditarMarca(Model model, String id, String txt)
+    
+    //editmarca - formulário
+    @GetMapping("/mac_clear")
+    public String formClearMarca(Model model, String id){
+        
+        Form("mac_clear");
+        
+        boolean valid = false;
+        
+        List<marca> lista = new Arquivo().Arq().Marcas();
+        
+        Numero doc = new Numero(id);
+        
+        marca marca = new marca();
+        
+        if(doc.Val()){
+            
+            for(marca mac : lista){
+                
+                if(mac.getId() == doc.Num()){
+                    
+                    marca = mac;
+                    valid = true;
+                    break;
+                    
+                }//if(mac.getId() == doc.Num())
+                
+            }//for(marca mac : lista)
+            
+        }//if(doc.Val())
+        
+        if(valid && marca.Read().size() > 1){
+            
+            int end = marca.Read().size()-1;
+            
+            String txt = marca.Read().get(end);
+            
+            marca.Add(txt, false);
+            new Arquivo().AlterMarca(marca, doc.Num());
+            
+            //return "redirect:/mac_view?cod=" + id;
+            
+        }
+        
+        return "redirect:/mac_view?cod=" + id;
+        
+    }//formEditarMarca(Model model, String id, String txt)
+    
+    //listprodutos -- página
+    //@GetMapping("/... [11:02 04/11/2024]
     
 }

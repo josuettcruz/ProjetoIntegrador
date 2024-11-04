@@ -39,7 +39,7 @@ public class Arquivo{
                 
                 for(int j = 0; j < arq_marca.Tot(i); j++){
                     
-                    mc.Add(arq_marca.Read(i, j));
+                    mc.Add(arq_marca.Read(i, j), true);
                     
                 }//for(int j = 0; j < arq_marca.Tot(i); j++)
                 

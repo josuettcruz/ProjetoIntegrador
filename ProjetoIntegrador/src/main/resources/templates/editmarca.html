@@ -12,17 +12,28 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
     </head>
     <body>
         
+        <doc th:text="${host}" style="display:none" />
+        <reset th:text="${reset}" style="display: none" />
+        
+        <!-- divtopclass -- div top class -->
+        <div th:class="${divtopclass}" th:style="${divtopstyle}">
+            <h1 th:text="${top}" th:class="${htopclass}" th:style="${htopstyle}" />
+        </div><!-- div -- Topo -->
+        
         <div>
             
-            <form th:action="@{/mac_modify}" method="GET">
+            <form th:action="@{/mac_modify}" onsubmit="return Submit()" method="GET">
                 
                 <input type="hidden" name="id" th:value="${form_type_hidden}" />
                 
-                <input type="text" name="txt" th:value="${text}" />
+                <input id="val" type="text" name="txt" th:value="${value}" />
                 
                 <input type="submit" value="SALVAR" />
                 
             </form>
+            
+            <button onclick="Host()">VOLTAR</button>
+            <button onclick="Reset()">LIMPAR HISTÓRICO</button>
             
         </div>
         
@@ -33,6 +44,49 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         </div>
         
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        
+        <script>
+            
+            const home = document.querySelector("doc").innerText;
+            const limp = document.querySelector("reset").innerText;
+            
+            function Host(){
+                
+                window.open(home,"_parent");
+                
+            }//Host()
+            
+            function Submit(){
+                
+                const dg = document.getElementById("val").value;
+                
+                if(dg.trim() === "" || dg.length <= 5){
+                    
+                    document.getElementById("val").focus();
+                    
+                    return false;
+                    
+                } else {
+                    
+                    return true;
+                    
+                }
+                
+            }//Submit()
+            
+            function Reset(){
+                
+                const op = document.getElementById("val").value;
+                
+                if(confirm("Deseja limpar todo o histórico da marca?")){
+                    
+                    window.open(limp,"_parent");
+                    
+                }//if(confirm(String))
+                
+            }//Reset()
+            
+        </script>
         
     </body>
 </html>
