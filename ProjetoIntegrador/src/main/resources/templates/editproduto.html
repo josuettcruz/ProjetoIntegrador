@@ -14,8 +14,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
     <body>
         
         <doc th:text="${host}" style="display:none" />
-        <del th:text="${btn_delet}" style="display:none" />
-        <ver th:text="${info_delet}" style="display:none" />
+        <cod th:text="${btn_delet}" style="display:none" />
+        <!--<ver th:text="${info_delet}" style="display:none" />-->
         <dig th:text="${text_value}" style="display:none" />
         
         <!-- divtopclass -- div top class -->
@@ -99,10 +99,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                     
                 } else if(del){//if(btn)
                     
-                    const apagar = document.querySelector("del").innerText;
-                    const nome = document.querySelector("ver").innerText;
+                    const apagar = document.querySelector("cod").innerText;
+                    //const nome = document.querySelector("ver").innerText;
                     
-                    if(confirm("APAGAR PRODUTO?\n" + nome)){
+                    /*if(confirm("APAGAR PRODUTO?\n" + nome)){
                         
                         window.open(apagar, "_parent");
                         
@@ -110,7 +110,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                         
                         del = false;
                         
-                    }//confirm
+                    }/*confirm*/
+           
+                    alert(apagar);
+                    window.open(apagar, "_parent");
                     
                     return false;
                     

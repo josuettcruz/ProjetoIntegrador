@@ -103,7 +103,7 @@ public class item {
         
     }//cod(int num)
     
-    /*public boolean newStatus(int cod){
+    public boolean newStatus(int cod){
         
         int num = cod-1;
         
@@ -113,7 +113,6 @@ public class item {
             Hora hour = new Hora();
             
             this.desc.setDataTime(date, hour);
-            this.history.Add(this.desc);
             
             return true;
             
@@ -121,7 +120,7 @@ public class item {
             return false;
         }
         
-    }/*newStatus(int cod)*/
+    }//newStatus(int cod)
     
     public boolean newStatus(int cod, String date){
         
@@ -176,5 +175,25 @@ public class item {
         }
         
     }//newStatus(int cod, String date, String hora)
+    
+    public String ReturnId(){
+        
+        String txt = "Nº ";
+        
+        if(this.id < 10){
+            txt += "000";
+            txt += this.id;
+        } else if(this.id < 100){
+            txt += "00";
+            txt += this.id;
+        } else if(this.id < 1000){
+            txt += this.id;
+        } else {
+            txt += "+999";
+        }
+        
+        return txt;
+        
+    }//ReturnId()
     
 }

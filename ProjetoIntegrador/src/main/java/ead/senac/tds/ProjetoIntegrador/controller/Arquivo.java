@@ -395,7 +395,7 @@ public class Arquivo{
 
         }
         
-        if(valid && num > 0){
+        if(valid && num >= 0){
             
             csv del = new csv(files_produto);
             

@@ -42,9 +42,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
             
             <div th:each="p : ${listar}">
                 
-                <!--<div th:class="${div_link}">
+                <!-- <div th:class="${div_link}">
                     <a th:href="'/editar_produto?cod=' + ${p.getId()}" th:class="${lista_link}" th:text="${p.ReturnId()}" />
-                </div> -- este código está dando erro -->
+                </div><!-- este código está dando erro -->
                 
                 <p th:class="${lista_p}" th:text="${p.ReturnId()} + ' - IMPOSSÍVEL FAZER ALETAÇÕES'" />
                 

@@ -9,7 +9,6 @@ import java.util.List;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 /**
  *
@@ -83,8 +82,8 @@ public class ControllerAll {
         /* Bootstrap -- div -- Topo */
         
         /* Bootstrap -- div -- Link para os formulários */
-        String div1class = "container-sm bg-success-subtle ";
-        div1class += "border border-success my-3 p-2";
+        String div1class = "container-xl bg-success-subtle ";
+        div1class += "border border-success my-2 my-xl-3 p-2 text-center";
         
         if(!lt.Produtos().isEmpty()){
             div1class += " d-print-none";
@@ -94,7 +93,7 @@ public class ControllerAll {
         model.addAttribute("div1aclass", "link-dark link-offset-1 " + 
                 "link-underline link-underline-opacity-0 " + 
                 "link-underline-opacity-75-hover " + 
-                "text-center fs-3 fw-bold");
+                "fs-3 fw-bold");
         /* div1 -- div 1 class */
         
         /* Bootstrap -- table -- Lista de itens */
@@ -178,7 +177,7 @@ public class ControllerAll {
     
     //novamarca - formulário
     @GetMapping("/mac")
-    public String formMarca(Model model, String txt){
+    public String formMarca(String txt){
         
         Form("mac");
         
@@ -199,7 +198,7 @@ public class ControllerAll {
     
     //novamarca - formulário
     @GetMapping("/del_mac")
-    public String delMarca(Model model, String cod){
+    public String delMarca(String cod){
         
         Form("del_mac");
         
@@ -313,7 +312,7 @@ public class ControllerAll {
     
     //editmarca - formulário
     @GetMapping("/mac_modify")
-    public String formEditarMarca(Model model, String id, String txt){
+    public String formEditarMarca(String id, String txt){
         
         Form("mac_modify");
         
@@ -356,7 +355,7 @@ public class ControllerAll {
     
     //editmarca - formulário
     @GetMapping("/mac_clear")
-    public String formClearMarca(Model model, String id){
+    public String formClearMarca(String id){
         
         Form("mac_clear");
         
@@ -427,16 +426,16 @@ public class ControllerAll {
         model.addAttribute("mac", lt.Marcas());
         
         //Form -- Bootstrap
-        model.addAttribute("div_form", "container-fluid my-5 " + 
+        model.addAttribute("div_form", "container-fluid my-5 py-5 " + 
                 "bg-success-subtle " + 
                 "d-print-none");
         
         model.addAttribute("input_text", "form-control py-2");
-        model.addAttribute("input_select", "form-select d-block py-2");
+        model.addAttribute("input_select", "form-select d-block mt-5 py-2");
         model.addAttribute("btn_submit", "d-inline btn btn-success btn-lg " + 
-                "my-2 my-sm-5 p-2");
+                "mt-5 p-2");
         model.addAttribute("btn_cancel", "d-inline btn btn-warning btn-lg " + 
-                "my-2 my-xl-5 p-2");
+                "mt-5 p-2");
         
         //Lista
         model.addAttribute("listar", lt.Produtos());
@@ -457,7 +456,7 @@ public class ControllerAll {
     
     //novoproduto -- formulário
     @GetMapping("/add_pro")
-    public String formAddProduto(Model model, String desc, String mac){
+    public String formAddProduto(String desc, String mac){
         
         Form("add_pro");
         
@@ -489,7 +488,7 @@ public class ControllerAll {
         
     }//formAddProduto(Model model, String desc, String mac)
     
-    //editproduto -- página
+    //editproduto -- página -- indisponúvel para essa versão
     @GetMapping("/editar_produto")
     public String editProduto(Model model, String cod){
         
@@ -545,7 +544,7 @@ public class ControllerAll {
                 "formulario_de_deletar_de_produto_sem_item?cod=" + 
                 pro.getId());
         
-        String informar;
+        /*String informar;
         
         if(pro.gedDesc().length() >= 30){
             
@@ -557,21 +556,23 @@ public class ControllerAll {
             
         }
         
-        model.addAttribute("info_delet", informar);
+        model.addAttribute("info_delet", informar);*/
         
         if(acept){
             
             return "editproduto";
             
         } else {
+            
             return "redirect:/produtos";
+            
         }
         
     }//String editProduto(Model model)
     
-    //editproduto -- formulário
+    //editproduto -- formulário -- indisponúvel para essa versão
     @GetMapping("/formulario_de_edicao_de_produto")
-    public String formEditProduto(Model model, String pro, String desc, String mac){
+    public String formEditProduto(String pro, String desc, String mac){
         
         int num = -1;
         
@@ -607,6 +608,7 @@ public class ControllerAll {
                 if(m.getId() == n_mac.Num()){
                     
                     produto.setMarca(m);
+                    break;
                     
                 }//if(m.getId() == n_mac.Num())
                 
@@ -620,9 +622,9 @@ public class ControllerAll {
         
     }//formEditProduto(Model model, String pro, String desc, String mac)
     
-    //editproduto -- formulário
+    //editproduto -- formulário -- indisponúvel para essa versão
     @GetMapping("/formulario_de_deletar_de_produto_sem_item")
-    public String formApagarProduto(Model model, String pro){
+    public String formApagarProduto(String pro){
         
         int num = -1;
         
@@ -657,5 +659,109 @@ public class ControllerAll {
         return "redirect:/produtos";
         
     }//formEditProduto(Model model, String pro, String desc, String mac)
+    
+    
+    //itens
+    @GetMapping("/itens")
+    public String novoItem(Model model){
+        
+        Page("itens");
+        
+        Data d = new Data(Registro.Real());
+        
+        model.addAttribute("title", d.DataAbreviada(false));
+        
+        model.addAttribute("top", "Hoje é " + 
+                new Data().DataCompleta(true) + 
+                "!");
+        
+        model.addAttribute("divtopclass", this.divtopclass);
+        model.addAttribute("divtopstyle", this.divtopstyle);
+        model.addAttribute("htopclass", this.htopclass);
+        model.addAttribute("htopstyle", this.htopstyle);
+        model.addAttribute("host", Registro.Host() + 
+                "itens");
+        
+        Lista page = new Arquivo().Arq();
+        
+        model.addAttribute("doc", Registro.Host());
+        model.addAttribute("itens", page.Itens());
+        model.addAttribute("produtos", page.Produtos());
+        
+        model.addAttribute("com", !page.Itens().isEmpty());
+        
+        return "item";
+        
+    }//novoItem(Model model)
+    
+    @GetMapping("/cod_it")
+    public String formItem(String mod, String status, String desc, String cod){
+        
+        Form("cod_it");
+        
+        Numero n_mod = new Numero(mod);
+        Numero n_cod = new Numero(cod);
+        Numero sit = new Numero(status);
+        
+        boolean valid = n_mod.Val() && n_cod.Val();
+        
+        Lista form_item = new Arquivo().Arq();
+        
+        item it = new item();
+        
+        it.setNome(desc);
+        
+        for(produto p : form_item.Produtos()){
+            
+            if(p.getId() == n_mod.Num()){
+                
+                it.setProduto(p);
+                break;
+                
+            }//if(p.getId() == n_mod.Num())
+            
+        }//for(produto p : form_item.Produtos())
+        
+        if(sit.Val()){
+            
+            valid = it.newStatus(sit.Num());
+            
+        } else {
+            
+            valid = false;
+            
+        }
+        
+        if(valid && n_mod.Num() == 0){
+            
+            new Arquivo().addItem(it);
+            
+        } else if(valid){
+            
+            int num = -1;
+            
+            for(int x = 0; x < form_item.Itens().size(); x++){
+                
+                if(form_item.Itens().get(x).getId() == n_mod.Num()){
+                    
+                    it = form_item.Itens().get(x);
+                    num = x;
+                    break;
+                    
+                }//if(form_item.Itens().get(x).getId() == n_mod.Num())
+                
+            }//for(int x = 0; x < form_item.Itens().size(); x++)
+            
+            if(num >= 0){
+                
+                new Arquivo().AlterItem(it, num);
+                
+            }
+            
+        }
+        
+        return "redirect:/";
+        
+    }
     
 }
