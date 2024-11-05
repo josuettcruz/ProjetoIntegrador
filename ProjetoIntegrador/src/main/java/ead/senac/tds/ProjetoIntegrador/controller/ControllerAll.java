@@ -9,7 +9,7 @@ import java.util.List;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 
 /**
  *
@@ -419,8 +419,6 @@ public class ControllerAll {
         model.addAttribute("divtopstyle", this.divtopstyle);
         model.addAttribute("htopclass", this.htopclass);
         model.addAttribute("htopstyle", this.htopstyle);
-        model.addAttribute("htopclass", "text-primary-emphasis text-center");
-        model.addAttribute("htopstyle", "font-size: 4vw");
         
         Lista lt = new Arquivo().Arq();
         
@@ -490,5 +488,174 @@ public class ControllerAll {
         return "redirect:/";
         
     }//formAddProduto(Model model, String desc, String mac)
+    
+    //editproduto -- página
+    @GetMapping("/editar_produto")
+    public String editProduto(Model model, String cod){
+        
+        boolean acept = false;
+        
+        Page("produtos");
+        
+        Data d = new Data(Registro.Real());
+        
+        model.addAttribute("title", "Não Funcional - " + d.DataAbreviada(false));
+        
+        model.addAttribute("top", "Hoje é " + 
+                new Data().DataCompleta(true) + 
+                "!");
+        
+        model.addAttribute("divtopclass", this.divtopclass);
+        model.addAttribute("divtopstyle", this.divtopstyle);
+        model.addAttribute("htopclass", this.htopclass);
+        model.addAttribute("htopstyle", this.htopstyle);
+        model.addAttribute("host", Registro.Host() + 
+                "produtos");
+        
+        Lista lt = new Arquivo().Arq();
+        
+        Numero num = new Numero(cod);
+        
+        produto pro = new produto();
+        
+        if(num.Val()){
+            
+            
+            
+            for(produto p : lt.Produtos()){
+                
+                if(p.getId() == num.Num()){
+                    
+                    pro = p;
+                    acept = true;
+                    break;
+                    
+                }//if(p.getId() == num.Num())
+                
+            }//for(produto p : lt.Produtos())
+            
+        }//if(num.Val())
+        
+        model.addAttribute("input_hidden", pro.getId());
+        model.addAttribute("text_value", pro.gedDesc());
+        model.addAttribute("select_active", pro.getMarca().getId());
+        model.addAttribute("mac", lt.Marcas());
+        model.addAttribute("delete_visible", pro.notItens());
+        model.addAttribute("btn_delete", Registro.Host() + 
+                "formulario_de_deletar_de_produto_sem_item?cod=" + 
+                pro.getId());
+        
+        String informar;
+        
+        if(pro.gedDesc().length() >= 30){
+            
+            informar = pro.gedDesc().substring(0, 27) + "...";
+            
+        } else {
+            
+            informar = pro.gedDesc();
+            
+        }
+        
+        model.addAttribute("info_delet", informar);
+        
+        if(acept){
+            
+            return "editproduto";
+            
+        } else {
+            return "redirect:/produtos";
+        }
+        
+    }//String editProduto(Model model)
+    
+    //editproduto -- formulário
+    @GetMapping("/formulario_de_edicao_de_produto")
+    public String formEditProduto(Model model, String pro, String desc, String mac){
+        
+        int num = -1;
+        
+        Numero n_pro = new Numero(pro);
+        Numero n_mac = new Numero(mac);
+        
+        Arquivo form = new Arquivo();
+        
+        produto produto = new produto();
+        
+        if(n_pro.Val() && n_mac.Val()){
+            
+            for(int i = 0; i < form.Arq().Produtos().size(); i++){
+                
+                if(form.Arq().Produtos().get(i).getId() == n_pro.Num()){
+                    
+                    num = i;
+                    produto = form.Arq().Produtos().get(i);
+                    break;
+                    
+                }//if(form.Arq().Produtos().get(i).getId() == n_pro.Num())
+                
+            }//for(int i = 0; i < form.Arq().Produtos().size(); i++)
+            
+        }//if(n_pro.Val() && n_mac.Val())
+        
+        if(num >= 0){
+            
+            produto.setDesc(desc);
+            
+            for(marca m : form.Arq().Marcas()){
+                
+                if(m.getId() == n_mac.Num()){
+                    
+                    produto.setMarca(m);
+                    
+                }//if(m.getId() == n_mac.Num())
+                
+            }//for(marca m : form.Arq().Marcas())
+            
+            form.AlterProduto(produto, num);
+            
+        }//if(acept)
+        
+        return "redirect:/produtos";
+        
+    }//formEditProduto(Model model, String pro, String desc, String mac)
+    
+    //editproduto -- formulário
+    @GetMapping("/formulario_de_deletar_de_produto_sem_item")
+    public String formApagarProduto(Model model, String pro){
+        
+        int num = -1;
+        
+        Numero cod = new Numero(pro);
+        
+        Arquivo delet = new Arquivo();
+        
+        produto produto = new produto();
+        
+        if(cod.Val()){
+            
+            for(int i = 0; i < delet.Arq().Produtos().size(); i++){
+                
+                if(delet.Arq().Produtos().get(i).getId() == cod.Num()){
+                    
+                    num = i;
+                    produto = delet.Arq().Produtos().get(i);
+                    break;
+                    
+                }//if(p.getId() == cod.Num())
+                
+            }//for(produto p : delet.Arq().Produtos())
+            
+        }//if(cod.Val())
+        
+        if(num >= 0 && produto.notItens()){
+            
+            delet.deleteProduto(num);
+            
+        }//if(acept && produto.notItens())
+        
+        return "redirect:/produtos";
+        
+    }//formEditProduto(Model model, String pro, String desc, String mac)
     
 }
